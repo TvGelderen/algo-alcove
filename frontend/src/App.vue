@@ -1,8 +1,8 @@
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
+  <header class="bg-secondary flex w-full">
+    <div>
+      <nav class="text-2xl m-4">
+        <RouterLink to="/" class="hover:text-theme">Home</RouterLink>
       </nav>
     </div>
   </header>
