@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/TvGelderen/algo-alcove/backend/handlers"
+	"github.com/TvGelderen/algo-alcove/handlers"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -15,13 +15,13 @@ import (
 func main() {
     godotenv.Load(".env")
 
-	port := os.Getenv("AA_PORT")
+	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8080"
-        fmt.Print("PORT is missing, defaulting to 8080\n")
+		port = "3000"
+        fmt.Print("PORT is missing, defaulting to 3000\n")
 	}
 
-	dbConnectionString := os.Getenv("AA_DB_CONNECTION_STRING")
+	dbConnectionString := os.Getenv("DB_CONNECTION_STRING")
 	if dbConnectionString == "" {
 		log.Fatal("No database connection string found.")
 	}
@@ -39,6 +39,7 @@ func main() {
 	e.GET("/assets/*", echo.WrapHandler(http.StripPrefix("/assets/", fs)))
 
     e.GET("/", handlers.HandleHomePage)
+    e.GET("/algorithms", handlers.HandleAlgorithmsPage)
 
     e.Start(":" + port)
 }

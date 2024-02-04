@@ -1,0 +1,48 @@
+package components
+
+script initializeHeader() {
+    const header = document.querySelector('header');
+    const menuIcon = document.getElementById('menu-icon');
+
+    if (menuIcon && header) {
+        const resizeListener = () => {
+            if (window.innerWidth > 768) {
+                header.dataset.open = "false";
+                window.removeEventListener('resize', resizeListener);
+            }
+        }
+
+        menuIcon.addEventListener('click', () => {
+            if (header.dataset.open == "true") {
+                header.dataset.open = "false";
+                window.removeEventListener('resize', resizeListener);
+            } else {
+                header.dataset.open = "true";
+                window.addEventListener('resize', resizeListener);
+            }
+        });
+    }
+}
+
+templ Header() {
+	<header
+		class="bg-secondary w-full h-[48px] md:h-[60px] relative flex justify-between items-center px-2"
+		data-open="false"
+	>
+		<div class="flex items-center">
+			<div class="text-2xl lg:text-3xl text-theme">
+				AlgoAlcove
+			</div>
+			<nav class="hidden md:flex text-xl lg:text-2xl m-4">
+				<a class="hover:text-theme/75 mx-4" href="/">Home</a>
+				<a class="hover:text-theme/75 mx-4" href="/algorithms">Algorithms</a>
+			</nav>
+		</div>
+		<div class="md:hidden" id="menu-icon">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+		@initializeHeader()
+	</header>
+}

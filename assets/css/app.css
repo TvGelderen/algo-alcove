@@ -1,3 +1,5 @@
+@import url('navicon.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

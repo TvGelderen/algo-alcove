@@ -1,0 +1,12 @@
+package layout
+
+import "github.com/TvGelderen/algo-alcove/view/components"
+
+templ Base() {
+	@Page() {
+		@components.Header()
+		<div class="w-[clamp(360px,97%,1500px)] mx-auto my-4">
+			{ children... }
+		</div>
+	}
+}
