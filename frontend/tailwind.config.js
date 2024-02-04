@@ -14,6 +14,9 @@ export default {
             'tertiary': '#24283b',
             'theme': '#00ff00',
         },
+        fontFamily: {
+            'sans': ['"Courier New"']
+        },
         extend: {},
     },
     plugins: [],
