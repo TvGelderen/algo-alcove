@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
@@ -10,6 +11,8 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+
+    _ "github.com/lib/pq"
 )
 
 func main() {
@@ -26,10 +29,12 @@ func main() {
 		log.Fatal("No database connection string found.")
 	}
 
-	// connection, err := sql.Open("postgres", dbConnectionString)
-	// if err != nil {
-	// 	log.Fatal("Unable to establish connection with database: ", err)
-	// }
+	connection, err := sql.Open("postgres", dbConnectionString)
+	if err != nil {
+		log.Fatal("Unable to establish connection with database: ", err)
+	}
+
+    h := handlers.New(connection)
 
     e := echo.New()
 
@@ -40,6 +45,10 @@ func main() {
 
     e.GET("/", handlers.HandleHomePage)
     e.GET("/algorithms", handlers.HandleAlgorithmsPage)
+    e.GET("/register", handlers.HandleRegisterPage)
+    e.GET("/login", handlers.HandleLoginPage)
+
+    e.PUT("/api/register", h.HandleRegister)
 
     e.Start(":" + port)
 }

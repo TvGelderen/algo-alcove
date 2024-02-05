@@ -29,13 +29,19 @@ templ Header() {
 		class="bg-secondary w-full h-[48px] md:h-[60px] relative flex justify-between items-center px-2"
 		data-open="false"
 	>
-		<div class="flex items-center">
-			<div class="text-2xl lg:text-3xl text-theme">
+		<div class="w-full flex items-center">
+			<div class="mr-6 text-2xl lg:text-3xl text-theme">
 				AlgoAlcove
 			</div>
-			<nav class="hidden md:flex text-xl lg:text-2xl m-4">
-				<a class="hover:text-theme/75 mx-4" href="/">Home</a>
-				<a class="hover:text-theme/75 mx-4" href="/algorithms">Algorithms</a>
+			<nav class="w-full hidden md:flex md:justify-between md:items-center">
+				<div class="text-xl lg:text-2xl">
+					<a class="hover:text-theme/75 ml-2" href="/">Home</a>
+					<a class="hover:text-theme/75 ml-2" href="/algorithms">Algorithms</a>
+				</div>
+				<div class="flex">
+					<a class="button mr-2" href="/register">Register</a>
+					<a class="button secondary" href="/login">Login</a>
+				</div>
 			</nav>
 		</div>
 		<div class="md:hidden" id="menu-icon">

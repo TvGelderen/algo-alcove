@@ -1,0 +1,24 @@
+package components
+
+type InputParams struct {
+	Type  string
+	Name  string
+	Value string
+	Label string
+	Error string
+}
+
+templ Input(params InputParams) {
+				<div class="input-container">
+	<label class="label" for={ params.Name }>{ params.Label }</label>
+	<input
+		class="input"
+		type={ params.Type }
+		id={ params.Name }
+		name={ params.Name }
+	/>
+	if params.Error != "" {
+		<label class="error" for={ params.Name }>{ params.Error }</label>
+	}
+    </div>
+}

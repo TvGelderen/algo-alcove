@@ -12,3 +12,11 @@ func HandleHomePage(c echo.Context) error {
 func HandleAlgorithmsPage(c echo.Context) error {
     return render(c, pages.Algorithms())
 }
+
+func HandleRegisterPage(c echo.Context) error {
+    return render(c, pages.Register())
+}
+
+func HandleLoginPage(c echo.Context) error {
+    return render(c, pages.Login())
+}
