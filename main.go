@@ -49,6 +49,7 @@ func main() {
     e.GET("/login", handlers.HandleLoginPage)
 
     e.PUT("/api/register", h.HandleRegister)
+    e.POST("/api/login", h.HandleLogin)
 
     e.Start(":" + port)
 }
