@@ -39,11 +39,12 @@ func main() {
     e := echo.New()
 
     e.Use(middleware.CORSWithConfig(middleware.DefaultCORSConfig))
+    e.Use(handlers.DefaultMiddleWare)
 
 	fs := http.FileServer(http.Dir("assets"))
 	e.GET("/assets/*", echo.WrapHandler(http.StripPrefix("/assets/", fs)))
 
-    e.GET("/", handlers.HandleHomePage)
+    e.GET("/", handlers.HandleHomePage, handlers.AuthorizePage)
     e.GET("/algorithms", handlers.HandleAlgorithmsPage)
     e.GET("/register", handlers.HandleRegisterPage)
     e.GET("/login", handlers.HandleLoginPage)

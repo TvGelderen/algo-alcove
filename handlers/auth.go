@@ -18,10 +18,10 @@ import (
 )
 
 type CustomClaims struct {
-    Id uuid.UUID `json:"id"`
-    Email string `json:"email"`
-    Name string `json:"name"`
-    jwt.RegisteredClaims
+	Id    uuid.UUID `json:"id"`
+	Email string    `json:"email"`
+	Name  string    `json:"name"`
+	jwt.RegisteredClaims
 }
 
 func (h *DefaultHandler) HandleRegister(c echo.Context) error {
@@ -76,25 +76,25 @@ func (h *DefaultHandler) HandleLogin(c echo.Context) error {
 		return c.HTML(http.StatusBadRequest, "Something went wrong decoding.")
 	}
 
-    user, err := h.DB.GetUserByEmail(c.Request().Context(), params.Email)
-    if err != nil {
+	user, err := h.DB.GetUserByEmail(c.Request().Context(), params.Email)
+	if err != nil {
 		return c.HTML(http.StatusUnauthorized, "Wrong email or password.")
-    }
+	}
 
-    validPassword := checkPasswordWithHash(params.Password, user.PasswordHash)
-    if !validPassword {
+	validPassword := checkPasswordWithHash(params.Password, user.PasswordHash)
+	if !validPassword {
 		return c.HTML(http.StatusUnauthorized, "Wrong email or password.")
-    }
+	}
 
-    token, err := createToken(user.ID, user.Username, user.Email)
-    if err != nil {
+	token, err := createToken(user.ID, user.Username, user.Email)
+	if err != nil {
 		return c.HTML(http.StatusBadRequest, "Something went wrong.")
-    }
+	}
 
-    setToken(c.Response().Writer, token)
+	setToken(c.Response().Writer, token)
 
-    c.Response().Writer.Header().Set("Hx-Redirect", "/")
-    return nil
+	c.Response().Writer.Header().Set("Hx-Redirect", "/")
+	return nil
 }
 
 func hashPassword(password string) ([]byte, error) {
@@ -108,32 +108,70 @@ func checkPasswordWithHash(password string, hash []byte) bool {
 }
 
 func createToken(id uuid.UUID, name, email string) (string, error) {
-    token := jwt.NewWithClaims(jwt.SigningMethodHS256, CustomClaims{
-        Id: id,
-        Name: name,
-        Email: email,
-    })
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, CustomClaims{
+		Id:    id,
+		Name:  name,
+		Email: email,
+	})
 
-    return token.SignedString([]byte(getHmacKey()))
+	return token.SignedString([]byte(getHmacKey()))
 }
 
 func setToken(w http.ResponseWriter, token string) {
-    cookie := http.Cookie{
-        Name: "AccessToken",
-        Value: token,
-        MaxAge: 3600,
-        Path: "/",
-        HttpOnly: true,
+	cookie := http.Cookie{
+		Name:     "AccessToken",
+		Value:    token,
+		MaxAge:   3600,
+		Path:     "/",
+		HttpOnly: true,
+	}
+
+	http.SetCookie(w, &cookie)
+}
+
+func removeToken(w http.ResponseWriter) {
+	cookie := http.Cookie{
+		Name:     "AccessToken",
+		Value:    "",
+		MaxAge:   0,
+		Path:     "/",
+		HttpOnly: true,
+	}
+
+	http.SetCookie(w, &cookie)
+}
+
+func getToken(r *http.Request) (string, error) {
+    cookie, err := r.Cookie("AccessToken")
+    if err != nil {
+        return "", err
     }
 
-    http.SetCookie(w, &cookie)
+    return cookie.Value, nil
+}
+
+func parseToken(token string) (*jwt.Token, error) {
+    parsedToken, err := jwt.ParseWithClaims(token, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
+        return []byte(getHmacKey()), nil
+    })
+
+    return parsedToken, err
+}
+
+func getIdFromToken(token string) (uuid.UUID, error) {
+    parsedToken, err := parseToken(token)
+    if err != nil {
+        return uuid.UUID{}, err
+    }
+
+    return parsedToken.Claims.(*CustomClaims).Id, nil
 }
 
 func getHmacKey() string {
-    key := os.Getenv("HMAC_KEY")
-    if key == "" {
-        log.Fatal("HMAC Secret key is missing.")
-    }
+	key := os.Getenv("HMAC_KEY")
+	if key == "" {
+		log.Fatal("HMAC Secret key is missing.")
+	}
 
-    return key
+	return key
 }
