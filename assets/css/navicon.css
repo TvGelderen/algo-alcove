@@ -1,46 +1,65 @@
-#menu-icon {
-    width: 32px;
-    height: 32px;
+.menu-icon-wrapper {
+    --size: 3.5px;
     cursor: pointer;
+    width: calc(var(--size) * 10);
+    height: calc(var(--size) * 8);
+    margin-bottom: var(--size); 
 }
 
-#menu-icon>span {
-    display: block;
-    background: #ffffff;
-    border-radius: 10px;
-    height: 3px;
-    margin: 6px 0;
-    transition: .4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+.menu-icon-wrapper .menu-icon {
+    width: calc(var(--size) * 10);
+    height: var(--size);
+    position: relative;
+    background: white;
+    transform: translateY(calc(var(--size) * 4));
+    transition: background 10ms 300ms ease;
 }
 
-#menu-icon>span:nth-of-type(1) {
-    width: 50%;
+.menu-icon-wrapper .menu-icon:before,
+.menu-icon-wrapper .menu-icon:after {
+    content: '';
+    position: absolute;
+    width: calc(var(--size) * 10);
+    height: var(--size);
+    background: white;
+    transition: top 300ms 350ms ease, transform 300ms 50ms ease;
 }
 
-#menu-icon>span:nth-of-type(2) {
-    width: 100%;
+.menu-icon-wrapper .menu-icon:before {
+    top: calc(var(--size) * -3);
 }
 
-#menu-icon>span:nth-of-type(3) {
-    width: 75%;
+.menu-icon-wrapper .menu-icon:after {
+    top: calc(var(--size) * 3);
 }
 
-header[data-open="true"] #menu-icon>span:nth-of-type(1) {
-    transform-origin: bottom;
-    transform: rotateZ(45deg) translate(4px, 0.5px);
+header[data-open="true"] .menu-icon-wrapper .menu-icon {
+    background: transparent;
 }
 
-header[data-open="true"] #menu-icon>span:nth-of-type(2) {
-    transform-origin: top;
-    transform: rotateZ(-45deg);
+header[data-open="true"] .menu-icon-wrapper .menu-icon:after,
+header[data-open="true"] .menu-icon-wrapper .menu-icon:before {
+    top: 0;
+    transition: top 300ms 50ms ease, transform 300ms 350ms ease;
 }
 
-header[data-open="true"] #menu-icon>span:nth-of-type(3) {
-    width: 50%;
-    transform-origin: bottom;
-    transform: translate(13.5px, -4px) rotateZ(45deg);
+header[data-open="true"] .menu-icon-wrapper .menu-icon:before {
+    transform: rotate(45deg);
+}
+
+header[data-open="true"] .menu-icon-wrapper .menu-icon:after {
+    transform: rotate(-45deg);
+}
+
+nav {
+    transition: bottom 400ms 100ms ease-in-out;
+}
+
+header[data-open="false"] nav {
+    bottom: 100%;
 }
 
 header[data-open="true"] nav {
-    display: flex;
+    flex-direction: column;
+    bottom: 0;
 }

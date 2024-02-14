@@ -44,10 +44,10 @@ func main() {
 	fs := http.FileServer(http.Dir("assets"))
 	e.GET("/assets/*", echo.WrapHandler(http.StripPrefix("/assets/", fs)))
 
-    e.GET("/", handlers.HandleHomePage, handlers.AuthorizePage)
-    e.GET("/algorithms", handlers.HandleAlgorithmsPage)
-    e.GET("/register", handlers.HandleRegisterPage)
-    e.GET("/login", handlers.HandleLoginPage)
+    e.GET("/", handlers.HandleHomePage, h.DefaultPageMiddleware)
+    e.GET("/algorithms", handlers.HandleAlgorithmsPage, h.DefaultPageMiddleware)
+    e.GET("/register", handlers.HandleRegisterPage, h.DefaultPageMiddleware)
+    e.GET("/login", handlers.HandleLoginPage, h.DefaultPageMiddleware)
 
     e.PUT("/api/register", h.HandleRegister)
     e.POST("/api/login", h.HandleLogin)
