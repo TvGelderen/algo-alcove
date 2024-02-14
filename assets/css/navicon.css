@@ -52,7 +52,7 @@ header[data-open="true"] .menu-icon-wrapper .menu-icon:after {
 }
 
 nav {
-    transition: bottom 400ms 100ms ease-in-out;
+    transition: bottom 400ms 100ms ease;
 }
 
 header[data-open="false"] nav {

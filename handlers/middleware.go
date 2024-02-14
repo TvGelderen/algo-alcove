@@ -45,8 +45,6 @@ func (h *DefaultHandler) DefaultPageMiddleware(next echo.HandlerFunc) echo.Handl
                 ctx := c.Request().Context()
                 ctx = context.WithValue(ctx, "user-email", user.Email)
                 c.SetRequest(c.Request().WithContext(ctx))
-
-                fmt.Printf("set email to: %v\n", user.Email)
             }
 		}
 

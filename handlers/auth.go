@@ -97,6 +97,12 @@ func (h *DefaultHandler) HandleLogin(c echo.Context) error {
 	return nil
 }
 
+func (h *DefaultHandler) HandleLogout(c echo.Context) error {
+    removeToken(c.Response().Writer)
+
+    return c.Redirect(302, "/")
+}
+
 func hashPassword(password string) ([]byte, error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 12)
 	return bytes, err
