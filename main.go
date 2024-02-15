@@ -46,12 +46,17 @@ func main() {
 
     e.GET("/", handlers.HandleHomePage, h.DefaultPageMiddleware)
     e.GET("/algorithms", handlers.HandleAlgorithmsPage, h.DefaultPageMiddleware)
+    e.GET("/algorithms/:algorithm", handlers.HandleAlgorithmPage, h.DefaultPageMiddleware)
+    e.GET("/algorithms/sorting/:algorithm", handlers.HandleAlgorithmPage, h.DefaultPageMiddleware)
+    e.GET("/algorithms/pathfinding/:algorithm", handlers.HandleAlgorithmPage, h.DefaultPageMiddleware)
     e.GET("/register", handlers.HandleRegisterPage, h.DefaultPageMiddleware)
     e.GET("/login", handlers.HandleLoginPage, h.DefaultPageMiddleware)
 
     e.PUT("/api/register", h.HandleRegister)
     e.POST("/api/login", h.HandleLogin)
     e.GET("/api/logout", h.HandleLogout)
+
+    e.GET("/*", handlers.HandleNotFoundPage)
 
     e.Start(":" + port)
 }

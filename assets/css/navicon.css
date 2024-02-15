@@ -10,7 +10,7 @@
     width: calc(var(--size) * 10);
     height: var(--size);
     position: relative;
-    background: white;
+    background: #c0caf5;
     transform: translateY(calc(var(--size) * 4));
     transition: background 10ms 300ms ease;
 }
@@ -21,7 +21,7 @@
     position: absolute;
     width: calc(var(--size) * 10);
     height: var(--size);
-    background: white;
+    background: #c0caf5;
     transition: top 300ms 350ms ease, transform 300ms 50ms ease;
 }
 
