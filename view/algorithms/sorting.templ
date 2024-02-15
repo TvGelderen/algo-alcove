@@ -1,0 +1,39 @@
+package algorithms
+
+import "github.com/TvGelderen/algo-alcove/view/pages"
+
+templ Sorting() {
+	@pages.Algorithms() {
+		<h2 class="text-xl md:text-2xl">Sorting</h2>
+		<h3 class="text-lg md:text-xl mt-4">Bubble Sort:</h3>
+		<p>Simple and easy to understand.</p>
+		<p>Inefficient for large datasets.</p>
+		<h3 class="text-lg md:text-xl mt-4">Insertion Sort:</h3>
+		<p>Also straightforward, often used for small datasets.</p>
+		<p>Inefficient for large datasets but better than Bubble Sort.</p>
+		<h3 class="text-lg md:text-xl mt-4">Selection Sort:</h3>
+		<p>Simple, but not as efficient as other algorithms.</p>
+		<p>Generally not recommended for large datasets.</p>
+		<h3 class="text-lg md:text-xl mt-4">Merge Sort:</h3>
+		<p>More complex than the above three but offers better performance.</p>
+		<p>A divide-and-conquer algorithm.</p>
+		<h3 class="text-lg md:text-xl mt-4">Quick Sort:</h3>
+		<p>A divide-and-conquer algorithm, efficient in practice.</p>
+		<p>More complex than Merge Sort but often faster.</p>
+		<h3 class="text-lg md:text-xl mt-4">Heap Sort:</h3>
+		<p>Uses a binary heap data structure.</p>
+		<p>More complex to implement compared to the previous algorithms.</p>
+		<h3 class="text-lg md:text-xl mt-4">Shell Sort:</h3>
+		<p>An improvement over Insertion Sort, using a diminishing increment.</p>
+		<p>Somewhat more complex than the basic elementary sorts.</p>
+		<h3 class="text-lg md:text-xl mt-4">Radix Sort:</h3>
+		<p>Non-comparative integer sorting algorithm.</p>
+		<p>More complex due to its unique approach.</p>
+		<h3 class="text-lg md:text-xl mt-4">Bucket Sort:</h3>
+		<p>Distributes elements into a number of buckets.</p>
+		<p>Involves some complexities in choosing appropriate bucket sizes.</p>
+		<h3 class="text-lg md:text-xl mt-4">Counting Sort:</h3>
+		<p>Suitable for integers with a limited range.</p>
+		<p>Non-comparative and considered linear time, but specific to certain data types.</p>
+	}
+}

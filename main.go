@@ -45,10 +45,14 @@ func main() {
 	e.GET("/assets/*", echo.WrapHandler(http.StripPrefix("/assets/", fs)))
 
     e.GET("/", handlers.HandleHomePage, h.DefaultPageMiddleware)
-    e.GET("/algorithms", handlers.HandleAlgorithmsPage, h.DefaultPageMiddleware)
+
+    e.GET("/algorithms", handlers.HandleAlgorithmsAboutPage, h.DefaultPageMiddleware)
+    e.GET("/algorithms/sorting", handlers.HandleSortingAlgorithmsPage, h.DefaultPageMiddleware)
+    e.GET("/algorithms/pathfinding", handlers.HandlePathFindinAlgorithmsPage, h.DefaultPageMiddleware)
     e.GET("/algorithms/:algorithm", handlers.HandleAlgorithmPage, h.DefaultPageMiddleware)
     e.GET("/algorithms/sorting/:algorithm", handlers.HandleAlgorithmPage, h.DefaultPageMiddleware)
     e.GET("/algorithms/pathfinding/:algorithm", handlers.HandleAlgorithmPage, h.DefaultPageMiddleware)
+
     e.GET("/register", handlers.HandleRegisterPage, h.DefaultPageMiddleware)
     e.GET("/login", handlers.HandleLoginPage, h.DefaultPageMiddleware)
 

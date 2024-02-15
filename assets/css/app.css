@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 .nav-link {
-    @apply hover:text-theme/75 md:ml-2;
+    @apply hover:text-theme/75;
 }
 
 .nav-link.active {

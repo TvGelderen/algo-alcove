@@ -8,44 +8,6 @@ func getEmail(ctx context.Context) string {
 	return ""
 }
 
-script initializeHeader() {
-    const header = document.querySelector('header');
-    const menuIcon = document.querySelector('.menu-icon-wrapper');
-
-    if (menuIcon && header) {
-        const resizeListener = () => {
-            if (window.innerWidth > 768) {
-                header.dataset.open = "false";
-                window.removeEventListener('resize', resizeListener);
-            }
-        }
-
-        menuIcon.addEventListener('click', () => {
-            if (header.dataset.open == "true") {
-                header.dataset.open = "false";
-                window.removeEventListener('resize', resizeListener);
-            } else {
-                header.dataset.open = "true";
-                window.addEventListener('resize', resizeListener);
-            }
-        });
-    }
-
-    const navLinks = document.getElementById('nav-links');
-
-    if (navLinks) {
-        for (const child of navLinks.children) {
-            if (child.innerText == "Home") {
-                if (window.location.href == child.href) {
-                    child.classList.add("active");
-                }
-            } else if (window.location.href.includes(child.href)) {
-                child.classList.add("active"); 
-            }
-        }
-    }
-}
-
 templ Header() {
 	<header
 		class="bg-secondary w-full h-[48px] md:h-[60px] flex justify-between items-center px-2"
@@ -60,8 +22,8 @@ templ Header() {
 					AlgoAlcove
 				</div>
 				<div id="nav-links" class="text-2xl flex flex-col gap-y-2 md:block">
-					<a class="nav-link" href="/">Home</a>
-					<a class="nav-link" href="/algorithms">Algorithms</a>
+					<a class="nav-link md:ml-2" href="/">Home</a>
+					<a class="nav-link md:ml-2" href="/algorithms">Algorithms</a>
 				</div>
 				<div class="md:hidden w-full my-4 border-b-[1px] border-b-tertiary"></div>
 				if email := getEmail(ctx); email != "" {
@@ -80,6 +42,6 @@ templ Header() {
 		<div class="menu-icon-wrapper md:hidden">
 			<div class="menu-icon"></div>
 		</div>
-		@initializeHeader()
+        <script type="text/javascript" src="/assets/js/header.js"></script>
 	</header>
 }
