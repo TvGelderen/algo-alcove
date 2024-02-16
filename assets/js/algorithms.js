@@ -1,17 +1,48 @@
 const sideNav = document.getElementById('side-nav');
+const algorithmContent = document.getElementById('algorithm-content')
 
-if (sideNav) {
-    const links = sideNav.querySelectorAll('a');   
+function initAglorithmsPage() {
+    if (sideNav && algorithmContent) {
+        const links = sideNav.querySelectorAll('.nav-link');
 
-    for (const link of links) {
-        if (link.innerText == "About") {
-            if (link.href == window.location.href) {
-                link.classList.add("active");
+        const updateUrl = event => {
+            const newUrl = window.location.origin + event.target.dataset.href;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+
+            updateHxGet();
+            updateLinks();
+        }
+
+        const updateHxGet = () => {
+            algorithmContent.setAttribute('hx-get', `/api${window.location.pathname}`);
+            htmx.process(algorithmContent);
+        }
+
+        const updateLinks = () => {
+            for (const link of links) {
+                if (link.innerText == "About") {
+                    if (window.location.origin + link.dataset.href == window.location.href) {
+                        link.classList.add("active");
+                    } else {
+                        link.classList.remove("active");
+                    }
+                } else {
+                    if (window.location.href.includes(link.dataset.href)) {
+                        link.classList.add("active");
+                    } else {
+                        link.classList.remove("active");
+                    }
+                }
             }
-        } else {
-            if (window.location.href.includes(link.href)) {
-                link.classList.add("active");
-            }
+        }
+
+        updateHxGet();
+        updateLinks();
+
+        for (const link of links) {
+            link.addEventListener('click', updateUrl);
         }
     }
 }
+
+initAglorithmsPage();

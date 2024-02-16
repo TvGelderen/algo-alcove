@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 .nav-link {
-    @apply hover:text-theme/75;
+    @apply hover:text-theme/75 cursor-pointer;
 }
 
 .nav-link.active {

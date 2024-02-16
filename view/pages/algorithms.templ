@@ -4,19 +4,23 @@ import "github.com/TvGelderen/algo-alcove/view/layout"
 
 templ Algorithms() {
 	@layout.Base() {
-		<div class="grid grid-cols-[240px_1fr] gap-x-8">
-			<div id="side-nav" class="bg-secondary h-full flex flex-col p-4">
-				<p class="text-xl">Sorting</p>
-				<a class="nav-link pl-4" href="/algorithms/sorting">About</a>
-				<a class="nav-link pl-4" href="/algorithms/sorting/bubble-sort">Bubble sort</a>
-				<p class="text-xl">Path finding</p>
-				<a class="nav-link pl-4" href="/algorithms/pathfinding">About</a>
-				<a class="nav-link pl-4" href="/algorithms/pathfinding/depth-first-search">Depth first search</a>
-			</div>
+		<div class="grid grid-cols-[280px_1fr] gap-x-8">
 			<div>
-				{ children... }
+				<div id="side-nav" class="bg-secondary flex flex-col p-4">
+					<p class="text-xl">Sorting</p>
+					<p class="nav-link pl-4" data-href="/algorithms/sorting">About</p>
+					<p class="nav-link pl-4" data-href="/algorithms/sorting/bubble-sort">Bubble sort</p>
+					<p class="text-xl">Path finding</p>
+					<p class="nav-link pl-4" data-href="/algorithms/pathfinding">About</p>
+					<p class="nav-link pl-4" data-href="/algorithms/pathfinding/depth-first-search">Depth first search</p>
+				</div>
 			</div>
+			<div 
+                id="algorithm-content"
+                hx-get="/api/algorithms"
+                hx-trigger="load"
+            />
 		</div>
-        <script type="text/javascript" src="/assets/js/algorithms.js"></script>
+		<script type="text/javascript" src="/assets/js/algorithms.js"></script>
 	}
 }

@@ -46,12 +46,15 @@ func main() {
 
     e.GET("/", handlers.HandleHomePage, h.DefaultPageMiddleware)
 
-    e.GET("/algorithms", handlers.HandleAlgorithmsAboutPage, h.DefaultPageMiddleware)
-    e.GET("/algorithms/sorting", handlers.HandleSortingAlgorithmsPage, h.DefaultPageMiddleware)
-    e.GET("/algorithms/pathfinding", handlers.HandlePathFindinAlgorithmsPage, h.DefaultPageMiddleware)
-    e.GET("/algorithms/:algorithm", handlers.HandleAlgorithmPage, h.DefaultPageMiddleware)
-    e.GET("/algorithms/sorting/:algorithm", handlers.HandleAlgorithmPage, h.DefaultPageMiddleware)
-    e.GET("/algorithms/pathfinding/:algorithm", handlers.HandleAlgorithmPage, h.DefaultPageMiddleware)
+    e.GET("/algorithms", handlers.HandleAlgorithmsPage, h.DefaultPageMiddleware)
+    e.GET("/algorithms/*", handlers.HandleAlgorithmsPage, h.DefaultPageMiddleware)
+
+    e.GET("/api/algorithms", handlers.HandleAlgorithm)
+    e.GET("/api/algorithms/:algorithm", handlers.HandleAlgorithm)
+    e.GET("/api/algorithms/sorting", handlers.HandleSortingAlgorithm)
+    e.GET("/api/algorithms/sorting/:algorithm", handlers.HandleSortingAlgorithm)
+    e.GET("/api/algorithms/pathfinding", handlers.HandlePathFindingAlgorithm)
+    e.GET("/api/algorithms/pathfinding/:algorithm", handlers.HandlePathFindingAlgorithm)
 
     e.GET("/register", handlers.HandleRegisterPage, h.DefaultPageMiddleware)
     e.GET("/login", handlers.HandleLoginPage, h.DefaultPageMiddleware)
