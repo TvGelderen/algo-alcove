@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"os"
 	"strings"
-	"time"
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
@@ -48,8 +47,6 @@ func (h *DefaultHandler) HandleRegister(c echo.Context) error {
 		Username:     "test",
 		Email:        params.Email,
 		PasswordHash: passwordHash,
-		CreatedAt:    time.Now(),
-		UpdatedAt:    time.Now(),
 	})
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)

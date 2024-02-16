@@ -26,12 +26,10 @@ function initAglorithmsPage() {
                     } else {
                         link.classList.remove("active");
                     }
+                } else if (window.location.href.includes(link.dataset.href)) {
+                    link.classList.add("active");
                 } else {
-                    if (window.location.href.includes(link.dataset.href)) {
-                        link.classList.add("active");
-                    } else {
-                        link.classList.remove("active");
-                    }
+                    link.classList.remove("active");
                 }
             }
         }

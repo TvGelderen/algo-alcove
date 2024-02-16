@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.article p {
+    @apply indent-6 mb-4;
+}
+
 .nav-link {
     @apply hover:text-theme/75 cursor-pointer;
 }

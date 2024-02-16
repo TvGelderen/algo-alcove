@@ -7,14 +7,13 @@ package database
 
 import (
 	"context"
-	"time"
 
 	"github.com/google/uuid"
 )
 
 const createUser = `-- name: CreateUser :exec
 INSERT INTO users (id, username, email, password_hash, created_at, updated_at)
-VALUES ($1, $2, $3, $4, $5, $6)
+VALUES ($1, $2, $3, $4, timezone('utc', NOW()), timezone('utc', NOW()))
 `
 
 type CreateUserParams struct {
@@ -22,8 +21,6 @@ type CreateUserParams struct {
 	Username     string
 	Email        string
 	PasswordHash []byte
-	CreatedAt    time.Time
-	UpdatedAt    time.Time
 }
 
 func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) error {
@@ -32,14 +29,12 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) error {
 		arg.Username,
 		arg.Email,
 		arg.PasswordHash,
-		arg.CreatedAt,
-		arg.UpdatedAt,
 	)
 	return err
 }
 
 const getUserByEmail = `-- name: GetUserByEmail :one
-SELECT id, username, email, password_hash, created_at, updated_at FROM users WHERE email = $1
+SELECT id, email, username, role, password_hash, created_at, updated_at FROM users WHERE email = $1
 `
 
 func (q *Queries) GetUserByEmail(ctx context.Context, email string) (User, error) {
@@ -47,8 +42,9 @@ func (q *Queries) GetUserByEmail(ctx context.Context, email string) (User, error
 	var i User
 	err := row.Scan(
 		&i.ID,
-		&i.Username,
 		&i.Email,
+		&i.Username,
+		&i.Role,
 		&i.PasswordHash,
 		&i.CreatedAt,
 		&i.UpdatedAt,
@@ -57,7 +53,7 @@ func (q *Queries) GetUserByEmail(ctx context.Context, email string) (User, error
 }
 
 const getUserById = `-- name: GetUserById :one
-SELECT id, username, email, password_hash, created_at, updated_at FROM users WHERE id = $1
+SELECT id, email, username, role, password_hash, created_at, updated_at FROM users WHERE id = $1
 `
 
 func (q *Queries) GetUserById(ctx context.Context, id uuid.UUID) (User, error) {
@@ -65,8 +61,9 @@ func (q *Queries) GetUserById(ctx context.Context, id uuid.UUID) (User, error) {
 	var i User
 	err := row.Scan(
 		&i.ID,
-		&i.Username,
 		&i.Email,
+		&i.Username,
+		&i.Role,
 		&i.PasswordHash,
 		&i.CreatedAt,
 		&i.UpdatedAt,

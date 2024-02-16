@@ -5,16 +5,34 @@
 package database
 
 import (
-	"time"
+	"database/sql"
 
 	"github.com/google/uuid"
 )
 
+type Algorithm struct {
+	ID          int32
+	TextID      string
+	Name        string
+	Type        string
+	Explanation string
+	CreatedAt   sql.NullTime
+	UpdatedAt   sql.NullTime
+}
+
+type AlgorithmCodeFile struct {
+	ID          int32
+	AlgorithmID sql.NullInt64
+	Filename    sql.NullString
+	Language    sql.NullString
+}
+
 type User struct {
 	ID           uuid.UUID
-	Username     string
 	Email        string
+	Username     string
+	Role         string
 	PasswordHash []byte
-	CreatedAt    time.Time
-	UpdatedAt    time.Time
+	CreatedAt    sql.NullTime
+	UpdatedAt    sql.NullTime
 }
