@@ -29,9 +29,17 @@
 }
 
 .input-container {
-    @apply w-full flex justify-between items-center my-2;
+    @apply w-full my-2;
 }
 
-.input-container label {
+.input-container>label {
     @apply text-lg md:text-xl;
+}
+
+label.error {
+    @apply mt-2 text-red-400;
+}
+
+input:has(+label.error) {
+    @apply border-red-400;
 }

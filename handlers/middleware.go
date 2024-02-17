@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/TvGelderen/algo-alcove/utils"
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 )
@@ -53,12 +54,12 @@ func (h *DefaultHandler) DefaultPageMiddleware(next echo.HandlerFunc) echo.Handl
 }
 
 func validAuthToken(r *http.Request) (uuid.UUID, error) {
-	token, err := getToken(r)
+	token, err := utils.GetToken(r)
 	if err != nil {
 		return uuid.UUID{}, err
 	}
 
-	id, err := getIdFromToken(token)
+	id, err := utils.GetIdFromToken(token)
 	if err != nil {
 		return uuid.UUID{}, err
 	}

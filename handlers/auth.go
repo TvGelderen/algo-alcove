@@ -3,43 +3,33 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
-	"log"
-	"net/http"
-	"os"
 	"strings"
 
-	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
-	"golang.org/x/crypto/bcrypt"
 
 	"github.com/TvGelderen/algo-alcove/database"
+	"github.com/TvGelderen/algo-alcove/types"
+	"github.com/TvGelderen/algo-alcove/utils"
+	"github.com/TvGelderen/algo-alcove/view/pages"
 )
 
-type CustomClaims struct {
-	Id    uuid.UUID `json:"id"`
-	Email string    `json:"email"`
-	Name  string    `json:"name"`
-	jwt.RegisteredClaims
-}
-
 func (h *DefaultHandler) HandleRegister(c echo.Context) error {
-	type parameters struct {
-		Email    string `json:"email"`
-		Password string `json:"password"`
-	}
-
-	params := parameters{}
+	params := types.RegisterParams{}
 	err := json.NewDecoder(c.Request().Body).Decode(&params)
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
-		return c.HTML(http.StatusBadRequest, "Something went wrong decoding.")
+        return render(c, pages.RegisterForm(params, types.RegisterErrors{ Other: "Something went wrong" }))
 	}
 
-	passwordHash, err := hashPassword(params.Password)
+    if errors, hasErrors := params.Validate(); hasErrors {
+        return render(c, pages.RegisterForm(params, errors))
+    }
+
+	passwordHash, err := utils.HashPassword(params.Password)
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
-		return c.HTML(http.StatusBadRequest, "Something went wrong.")
+        return render(c, pages.RegisterForm(params, types.RegisterErrors{ Other: "Something went wrong" }))
 	}
 
 	err = h.DB.CreateUser(c.Request().Context(), database.CreateUserParams{
@@ -51,9 +41,9 @@ func (h *DefaultHandler) HandleRegister(c echo.Context) error {
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
 		if strings.Contains(err.Error(), "users_email_key") {
-			return c.HTML(http.StatusUnauthorized, "That email is already taken.")
+            return render(c, pages.RegisterForm(params, types.RegisterErrors{ Email: "That email is already taken" }))
 		}
-		return c.HTML(http.StatusUnauthorized, "Something went wrong creating account.")
+        return render(c, pages.RegisterForm(params, types.RegisterErrors{ Other: "Something went wrong" }))
 	}
 
 	c.Response().Writer.Header().Set("Hx-Redirect", "/login")
@@ -61,120 +51,40 @@ func (h *DefaultHandler) HandleRegister(c echo.Context) error {
 }
 
 func (h *DefaultHandler) HandleLogin(c echo.Context) error {
-	type parameters struct {
-		Email    string `json:"email"`
-		Password string `json:"password"`
-	}
-
-	params := parameters{}
+	params := types.LoginParams{}
 	err := json.NewDecoder(c.Request().Body).Decode(&params)
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
-		return c.HTML(http.StatusBadRequest, "Something went wrong decoding.")
+        return render(c, pages.LoginForm(params, types.LoginErrors{ Other: "Something went wrong" }))
 	}
+
+    if errors, hasErrors := params.Validate(); hasErrors {
+        return render(c, pages.LoginForm(params, errors))
+    }
 
 	user, err := h.DB.GetUserByEmail(c.Request().Context(), params.Email)
 	if err != nil {
-		return c.HTML(http.StatusUnauthorized, "Wrong email or password.")
+        return render(c, pages.LoginForm(params, types.LoginErrors{ Other: "Wrong email or password" }))
 	}
 
-	validPassword := checkPasswordWithHash(params.Password, user.PasswordHash)
+	validPassword := utils.CheckPasswordWithHash(params.Password, user.PasswordHash)
 	if !validPassword {
-		return c.HTML(http.StatusUnauthorized, "Wrong email or password.")
+        return render(c, pages.LoginForm(params, types.LoginErrors{ Other: "Wrong email or password" }))
 	}
 
-	token, err := createToken(user.ID, user.Username, user.Email)
+	token, err := utils.CreateToken(user.ID, user.Username, user.Email)
 	if err != nil {
-		return c.HTML(http.StatusBadRequest, "Something went wrong.")
+        return render(c, pages.LoginForm(params, types.LoginErrors{ Other: "Something went wrong" }))
 	}
 
-	setToken(c.Response().Writer, token)
+	utils.SetToken(c.Response().Writer, token)
 
 	c.Response().Writer.Header().Set("Hx-Redirect", "/")
 	return nil
 }
 
 func (h *DefaultHandler) HandleLogout(c echo.Context) error {
-    removeToken(c.Response().Writer)
+    utils.RemoveToken(c.Response().Writer)
 
     return c.Redirect(302, "/")
-}
-
-func hashPassword(password string) ([]byte, error) {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 12)
-	return bytes, err
-}
-
-func checkPasswordWithHash(password string, hash []byte) bool {
-	err := bcrypt.CompareHashAndPassword(hash, []byte(password))
-	return err == nil
-}
-
-func createToken(id uuid.UUID, name, email string) (string, error) {
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, CustomClaims{
-		Id:    id,
-		Name:  name,
-		Email: email,
-	})
-
-	return token.SignedString([]byte(getHmacKey()))
-}
-
-func setToken(w http.ResponseWriter, token string) {
-	cookie := http.Cookie{
-		Name:     "AccessToken",
-		Value:    token,
-		MaxAge:   3600,
-		Path:     "/",
-		HttpOnly: true,
-	}
-
-	http.SetCookie(w, &cookie)
-}
-
-func removeToken(w http.ResponseWriter) {
-	cookie := http.Cookie{
-		Name:     "AccessToken",
-		Value:    "",
-		MaxAge:   0,
-		Path:     "/",
-		HttpOnly: true,
-	}
-
-	http.SetCookie(w, &cookie)
-}
-
-func getToken(r *http.Request) (string, error) {
-    cookie, err := r.Cookie("AccessToken")
-    if err != nil {
-        return "", err
-    }
-
-    return cookie.Value, nil
-}
-
-func parseToken(token string) (*jwt.Token, error) {
-    parsedToken, err := jwt.ParseWithClaims(token, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
-        return []byte(getHmacKey()), nil
-    })
-
-    return parsedToken, err
-}
-
-func getIdFromToken(token string) (uuid.UUID, error) {
-    parsedToken, err := parseToken(token)
-    if err != nil {
-        return uuid.UUID{}, err
-    }
-
-    return parsedToken.Claims.(*CustomClaims).Id, nil
-}
-
-func getHmacKey() string {
-	key := os.Getenv("HMAC_KEY")
-	if key == "" {
-		log.Fatal("HMAC Secret key is missing.")
-	}
-
-	return key
 }

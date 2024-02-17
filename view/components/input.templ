@@ -9,16 +9,19 @@ type InputParams struct {
 }
 
 templ Input(params InputParams) {
-				<div class="input-container">
-	<label class="label" for={ params.Name }>{ params.Label }</label>
-	<input
-		class="input"
-		type={ params.Type }
-		id={ params.Name }
-		name={ params.Name }
-	/>
-	if params.Error != "" {
-		<label class="error" for={ params.Name }>{ params.Error }</label>
-	}
-    </div>
+	<div class="input-container">
+		<label class="label" for={ params.Name }>{ params.Label }</label>
+		<div class="flex flex-col">
+			<input
+				class="input"
+				type={ params.Type }
+				id={ params.Name }
+				name={ params.Name }
+                value={ params.Value }
+			/>
+			if params.Error != "" {
+				<label class="error" for={ params.Name }>{ params.Error }</label>
+			}
+		</div>
+	</div>
 }
