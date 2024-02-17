@@ -5,8 +5,8 @@ CREATE TABLE users (
     username VARCHAR(32) UNIQUE NOT NULL,
     role VARCHAR(32) UNIQUE NOT NULL,
     password_hash BYTEA,
-    created_at TIME WITH TIME ZONE,
-    updated_at TIME WITH TIME ZONE
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 
 CREATE TABLE algorithms (
@@ -15,8 +15,8 @@ CREATE TABLE algorithms (
     name VARCHAR(128) UNIQUE NOT NULL,
     type VARCHAR(32) NOT NULL,
     explanation TEXT NOT NULL,
-    created_at TIME WITH TIME ZONE,
-    updated_at TIME WITH TIME ZONE
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 
 CREATE TABLE algorithm_code_files (
