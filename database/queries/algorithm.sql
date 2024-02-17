@@ -1,23 +1,29 @@
 -- name: CreateAlgorithm :exec
-INSERT INTO algorithms (text_id, name, type, explanation, created_at, updated_at)
-VALUES ($1, $2, $3, $4, timezone('utc', NOW()), timezone('utc', NOW()));
+INSERT INTO algorithms (text_id, name, type, position, explanation, created_at, updated_at)
+VALUES ($1, $2, $3, $4, $5, timezone('utc', NOW()), timezone('utc', NOW()));
 
 -- name: UpdateAlgorithm :exec
 UPDATE algorithms
 SET text_id = $2, 
     name = $3,
-    updated_at = timezone('utc', NOW()) 
+    updated_at = timezone('utc', NOW())
 WHERE id = $1;
 
 -- name: UpdateAlgorithmName :exec
 UPDATE algorithms
 SET name = $2, 
-    updated_at = timezone('utc', NOW()) 
+    updated_at = timezone('utc', NOW())
 WHERE id = $1;
 
 -- name: UpdateAlgorithmExplanation :exec
 UPDATE algorithms
 SET explanation = $2,
+    updated_at = timezone('utc', NOW())
+WHERE id = $1;
+
+-- name: UpdateAlgorithmPosition :exec
+UPDATE algorithms
+SET position = $2,
     updated_at = timezone('utc', NOW()) 
 WHERE id = $1;
 

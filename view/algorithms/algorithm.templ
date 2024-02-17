@@ -5,6 +5,6 @@ import "github.com/TvGelderen/algo-alcove/models"
 templ Algorithm(algorithm models.Algorithm) {
     <h2 class="text-xl md:text-2xl">{ algorithm.Name }</h2>
     <div class="article">
-        <p>{ algorithm.Explanation }</p>
+        @templ.Raw(algorithm.Explanation)
     </div>
 }

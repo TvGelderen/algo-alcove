@@ -31,6 +31,7 @@ type Algorithm struct {
 	TextId      string
 	Name        string
 	Type        AlgorithmType
+	Position    int16
 	Explanation string
 }
 
@@ -40,6 +41,7 @@ func ToAlgorithm(dbModel database.Algorithm) Algorithm {
 		TextId:      dbModel.TextID,
 		Name:        dbModel.Name,
 		Type:        AlgorithmType(dbModel.Type),
+		Position:    dbModel.Position,
 		Explanation: dbModel.Explanation,
 	}
 }

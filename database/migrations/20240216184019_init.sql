@@ -14,6 +14,7 @@ CREATE TABLE algorithms (
     text_id VARCHAR(128) UNIQUE NOT NULL,
     name VARCHAR(128) UNIQUE NOT NULL,
     type SMALLINT NOT NULL,
+    position SMALLINT NOT NULL,
     explanation TEXT NOT NULL,
     created_at TIMESTAMP,
     updated_at TIMESTAMP

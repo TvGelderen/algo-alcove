@@ -15,6 +15,7 @@ type Algorithm struct {
 	TextID      string
 	Name        string
 	Type        int16
+	Position    int16
 	Explanation string
 	CreatedAt   sql.NullTime
 	UpdatedAt   sql.NullTime
