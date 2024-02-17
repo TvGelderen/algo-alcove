@@ -13,7 +13,7 @@ CREATE TABLE algorithms (
     id SERIAL PRIMARY KEY,
     text_id VARCHAR(128) UNIQUE NOT NULL,
     name VARCHAR(128) UNIQUE NOT NULL,
-    type VARCHAR(32) NOT NULL,
+    type SMALLINT NOT NULL,
     explanation TEXT NOT NULL,
     created_at TIMESTAMP,
     updated_at TIMESTAMP
@@ -21,7 +21,7 @@ CREATE TABLE algorithms (
 
 CREATE TABLE algorithm_code_files (
     id SERIAL PRIMARY KEY,
-    algorithm_id BIGINT,
+    algorithm_id INT,
     filename VARCHAR(64),
     language VARCHAR(32),
     CONSTRAINT fk_algorithm 

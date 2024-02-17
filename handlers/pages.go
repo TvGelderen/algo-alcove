@@ -9,10 +9,6 @@ func HandleHomePage(c echo.Context) error {
     return render(c, pages.Home())
 }
 
-func HandleAlgorithmsPage(c echo.Context) error {
-    return render(c, pages.Algorithms())
-}
-
 func HandleRegisterPage(c echo.Context) error {
     return render(c, pages.Register())
 }

@@ -1,33 +1,47 @@
 package pages
 
-import "github.com/TvGelderen/algo-alcove/view/layout"
+import (
+    "fmt"
 
-templ Algorithms() {
+    "github.com/TvGelderen/algo-alcove/view/layout"
+    "github.com/TvGelderen/algo-alcove/models"
+)
+
+func getAlgorithmsOfType(algorithms []models.AlgorithmName, algorithmType models.AlgorithmType) (retVal []models.AlgorithmName) {
+	for _, algorithm := range algorithms {
+		if models.AlgorithmType(algorithm.Type) == algorithmType {
+			retVal = append(retVal, algorithm)
+		}
+	}
+	return
+}
+
+templ Algorithms(algorithms []models.AlgorithmName) {
 	@layout.Base() {
 		<div class="grid grid-cols-[280px_1fr] gap-x-8">
 			<div>
 				<div id="side-nav" class="bg-secondary flex flex-col p-4">
 					<p class="text-xl">Sorting</p>
-					<p class="nav-link pl-4" data-href="/algorithms/sorting">About</p>
-					<p class="nav-link pl-4" data-href="/algorithms/sorting/bubble-sort">Bubble sort</p>
-					<p class="nav-link pl-4" data-href="/algorithms/sorting/insertion-sort">Insertion sort</p>
-					<p class="nav-link pl-4" data-href="/algorithms/sorting/selection-sort">Selection sort</p>
-					<p class="nav-link pl-4" data-href="/algorithms/sorting/merge-sort">Merge sort</p>
-					<p class="nav-link pl-4" data-href="/algorithms/sorting/quick-sort">Quick sort</p>
-					<p class="nav-link pl-4" data-href="/algorithms/sorting/heap-sort">Heap sort</p>
+					<div class="pl-4">
+						<p class="nav-link" data-href="/algorithms/sorting">About</p>
+						for _, algorithm := range getAlgorithmsOfType(algorithms, models.AlgoritmhTypeSorting) {
+                            <p class="nav-link" data-href={ fmt.Sprintf("/algorithms/sorting/%v", algorithm.TextId) }>{ algorithm.Name }</p>
+						}
+					</div>
 					<p class="text-xl">Path finding</p>
-					<p class="nav-link pl-4" data-href="/algorithms/pathfinding">About</p>
-                    <p class="nav-link pl-4" data-href="/algorithms/pathfinding/breadth-first-search">Breadth-first search</p>
-					<p class="nav-link pl-4" data-href="/algorithms/pathfinding/depth-first-search">Depth-first search</p>
-					<p class="nav-link pl-4" data-href="/algorithms/pathfinding/dijkstras-algorithm">Dijkstra's algorithm</p>
-					<p class="nav-link pl-4" data-href="/algorithms/pathfinding/a-star-algorithm">A* algorithm</p>
+					<div class="pl-4">
+						<p class="nav-link" data-href="/algorithms/pathfinding">About</p>
+						for _, algorithm := range getAlgorithmsOfType(algorithms, models.AlgoritmhTypePathFinding) {
+                            <p class="nav-link" data-href={ fmt.Sprintf("/algorithms/pathfinding/%v", algorithm.TextId) }>{ algorithm.Name }</p>
+						}
+					</div>
 				</div>
 			</div>
-			<div 
-                id="algorithm-content"
-                hx-get="/api/algorithms"
-                hx-trigger="load"
-            />
+			<div
+				id="algorithm-content"
+				hx-get="/api/algorithms"
+				hx-trigger="load"
+			></div>
 		</div>
 		<script type="text/javascript" src="/assets/js/algorithms.js"></script>
 	}

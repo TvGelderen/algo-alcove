@@ -14,7 +14,7 @@ type Algorithm struct {
 	ID          int32
 	TextID      string
 	Name        string
-	Type        string
+	Type        int16
 	Explanation string
 	CreatedAt   sql.NullTime
 	UpdatedAt   sql.NullTime
@@ -22,7 +22,7 @@ type Algorithm struct {
 
 type AlgorithmCodeFile struct {
 	ID          int32
-	AlgorithmID sql.NullInt64
+	AlgorithmID sql.NullInt32
 	Filename    sql.NullString
 	Language    sql.NullString
 }

@@ -28,3 +28,10 @@ WHERE id = $1;
 -- name: GetAlgorithmByTextId :one
 SELECT * FROM algorithms
 WHERE text_id = $1;
+
+-- name: GetAlgorithmByType :one
+SELECT * FROM algorithms
+WHERE type = $1;
+
+-- name: GetAlgorithmNames :many
+SELECT text_id, name, type FROM algorithms;

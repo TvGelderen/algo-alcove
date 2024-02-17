@@ -17,7 +17,7 @@ VALUES ($1, $2, $3, $4, timezone('utc', NOW()), timezone('utc', NOW()))
 type CreateAlgorithmParams struct {
 	TextID      string
 	Name        string
-	Type        string
+	Type        int16
 	Explanation string
 }
 
@@ -69,6 +69,59 @@ func (q *Queries) GetAlgorithmByTextId(ctx context.Context, textID string) (Algo
 		&i.UpdatedAt,
 	)
 	return i, err
+}
+
+const getAlgorithmByType = `-- name: GetAlgorithmByType :one
+SELECT id, text_id, name, type, explanation, created_at, updated_at FROM algorithms
+WHERE type = $1
+`
+
+func (q *Queries) GetAlgorithmByType(ctx context.Context, type_ int16) (Algorithm, error) {
+	row := q.db.QueryRowContext(ctx, getAlgorithmByType, type_)
+	var i Algorithm
+	err := row.Scan(
+		&i.ID,
+		&i.TextID,
+		&i.Name,
+		&i.Type,
+		&i.Explanation,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+	)
+	return i, err
+}
+
+const getAlgorithmNames = `-- name: GetAlgorithmNames :many
+SELECT text_id, name, type FROM algorithms
+`
+
+type GetAlgorithmNamesRow struct {
+	TextID string
+	Name   string
+	Type   int16
+}
+
+func (q *Queries) GetAlgorithmNames(ctx context.Context) ([]GetAlgorithmNamesRow, error) {
+	rows, err := q.db.QueryContext(ctx, getAlgorithmNames)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []GetAlgorithmNamesRow
+	for rows.Next() {
+		var i GetAlgorithmNamesRow
+		if err := rows.Scan(&i.TextID, &i.Name, &i.Type); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
 }
 
 const updateAlgorithm = `-- name: UpdateAlgorithm :exec

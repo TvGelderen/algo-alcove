@@ -57,8 +57,8 @@ func main() {
 
     e.GET("/", handlers.HandleHomePage, h.DefaultPageMiddleware)
 
-    e.GET("/algorithms", handlers.HandleAlgorithmsPage, h.DefaultPageMiddleware)
-    e.GET("/algorithms/*", handlers.HandleAlgorithmsPage, h.DefaultPageMiddleware)
+    e.GET("/algorithms", h.HandleAlgorithmsPage, h.DefaultPageMiddleware)
+    e.GET("/algorithms/*", h.HandleAlgorithmsPage, h.DefaultPageMiddleware)
 
     e.GET("/api/algorithms", handlers.HandleAlgorithmsAbout)
     e.GET("/api/algorithms/:type", h.HandleAlgorithm)
