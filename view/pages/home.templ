@@ -1,9 +1,36 @@
 package pages
 
-import "github.com/TvGelderen/algo-alcove/view/layout"
+import (
+	"github.com/TvGelderen/algo-alcove/view/layout"
+	"github.com/TvGelderen/algo-alcove/view/components"
+)
+
+var code = `function bubbleSort(arr) {
+    var i, j;
+    var len = arr.length;
+    var isSwapped = false;
+ 
+    for (i = 0; i < len; i++) {
+        isSwapped = false;
+ 
+        for (j = 0; j < (len - i - 1); j++) {
+            if (arr[j] > arr[j + 1]) {
+                var temp = arr[j]
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                isSwapped = true;
+            }
+        }
+ 
+        if (!isSwapped) {
+            break;
+        }
+    }
+}`
 
 templ Home() {
 	@layout.Base() {
 		<h1 class="text-xl md:text-2xl">Home</h1>
+		@components.Code("javascript", code)
 	}
 }
