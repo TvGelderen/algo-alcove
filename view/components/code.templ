@@ -3,12 +3,7 @@ package components
 import "fmt"
 
 templ Code(language, code string) {
-	<div>
-		<link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/styles/tokyo-night-dark.min.css"/>
-		<script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
-		<script>hljs.highlightAll()</script>
-		<pre class="text-md relative overflow-hidden max-w-full mb-6">
-			<code class={ fmt.Sprintf("language-%v", language) }>{ code }</code>
-		</pre>
-	</div>
+    <pre class="text-md relative overflow-hidden max-w-full mb-6">
+        <code class={ fmt.Sprintf("language-%v", language) }>{ code }</code>
+    </pre>
 }

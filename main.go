@@ -63,6 +63,7 @@ func main() {
     e.GET("/api/algorithms", handlers.HandleAlgorithmsAbout)
     e.GET("/api/algorithms/:type", h.HandleAlgorithm)
     e.GET("/api/algorithms/:type/:algorithm", h.HandleAlgorithm)
+    e.GET("/api/algorithms/:algorithmId/code", h.HandleGetAlogritmCode)
 
     e.GET("/register", handlers.HandleRegisterPage, h.DefaultPageMiddleware)
     e.GET("/login", handlers.HandleLoginPage, h.DefaultPageMiddleware)

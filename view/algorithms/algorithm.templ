@@ -1,10 +1,19 @@
 package algorithms
 
-import "github.com/TvGelderen/algo-alcove/models"
+import (
+	"github.com/TvGelderen/algo-alcove/models"
+	"fmt"
+)
 
 templ Algorithm(algorithm models.Algorithm) {
-    <h2 class="text-xl md:text-2xl">{ algorithm.Name }</h2>
-    <div class="article">
-        @templ.Raw(algorithm.Explanation)
-    </div>
+	<h2 class="text-xl md:text-2xl">{ algorithm.Name }</h2>
+	<div class="article">
+		@templ.Raw(algorithm.Explanation)
+	</div>
+	<div
+        class="mt-8"
+		hx-get={ fmt.Sprintf("/api/algorithms/%v/code", algorithm.Id) }
+		hx-trigger="load"
+		hx-on::after-request="codeFetched(event)"
+	></div>
 }

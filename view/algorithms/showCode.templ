@@ -1,0 +1,12 @@
+package algorithms
+
+import (
+    "github.com/TvGelderen/algo-alcove/models"
+    "github.com/TvGelderen/algo-alcove/view/components"
+)
+
+templ ShowCode(codeSlice []models.AlgorithmCode) {
+    for _, code := range codeSlice {
+        @components.Code(code.Language, code.Code)
+    }
+}

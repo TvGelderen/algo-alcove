@@ -1,6 +1,7 @@
--- name: CreateAlgorithm :exec
+-- name: CreateAlgorithm :one
 INSERT INTO algorithms (text_id, name, type, position, explanation, created_at, updated_at)
-VALUES ($1, $2, $3, $4, $5, timezone('utc', NOW()), timezone('utc', NOW()));
+VALUES ($1, $2, $3, $4, $5, timezone('utc', NOW()), timezone('utc', NOW()))
+RETURNING id;
 
 -- name: UpdateAlgorithm :exec
 UPDATE algorithms

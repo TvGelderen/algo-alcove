@@ -20,11 +20,11 @@ CREATE TABLE algorithms (
     updated_at TIMESTAMP
 );
 
-CREATE TABLE algorithm_code_files (
+CREATE TABLE algorithm_code (
     id SERIAL PRIMARY KEY,
-    algorithm_id INT,
-    filename VARCHAR(64),
-    language VARCHAR(32),
+    algorithm_id INT NOT NULL,
+    language VARCHAR(32) NOT NULL,
+    code TEXT NOT NULL,
     CONSTRAINT fk_algorithm 
         FOREIGN KEY(algorithm_id)
         REFERENCES algorithms(id)

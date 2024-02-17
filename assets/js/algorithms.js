@@ -44,3 +44,10 @@ function initAglorithmsPage() {
 }
 
 initAglorithmsPage();
+
+function codeFetched(event) {
+    code = event.target.querySelector('code');
+    if (code) {
+        hljs.highlightElement(code);
+    }
+}

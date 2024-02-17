@@ -21,11 +21,11 @@ type Algorithm struct {
 	UpdatedAt   sql.NullTime
 }
 
-type AlgorithmCodeFile struct {
+type AlgorithmCode struct {
 	ID          int32
-	AlgorithmID sql.NullInt32
-	Filename    sql.NullString
-	Language    sql.NullString
+	AlgorithmID int32
+	Language    string
+	Code        string
 }
 
 type User struct {

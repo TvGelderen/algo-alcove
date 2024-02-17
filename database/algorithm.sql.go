@@ -9,9 +9,10 @@ import (
 	"context"
 )
 
-const createAlgorithm = `-- name: CreateAlgorithm :exec
+const createAlgorithm = `-- name: CreateAlgorithm :one
 INSERT INTO algorithms (text_id, name, type, position, explanation, created_at, updated_at)
 VALUES ($1, $2, $3, $4, $5, timezone('utc', NOW()), timezone('utc', NOW()))
+RETURNING id
 `
 
 type CreateAlgorithmParams struct {
@@ -22,15 +23,17 @@ type CreateAlgorithmParams struct {
 	Explanation string
 }
 
-func (q *Queries) CreateAlgorithm(ctx context.Context, arg CreateAlgorithmParams) error {
-	_, err := q.db.ExecContext(ctx, createAlgorithm,
+func (q *Queries) CreateAlgorithm(ctx context.Context, arg CreateAlgorithmParams) (int32, error) {
+	row := q.db.QueryRowContext(ctx, createAlgorithm,
 		arg.TextID,
 		arg.Name,
 		arg.Type,
 		arg.Position,
 		arg.Explanation,
 	)
-	return err
+	var id int32
+	err := row.Scan(&id)
+	return id, err
 }
 
 const getAlgorithmById = `-- name: GetAlgorithmById :one
