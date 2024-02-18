@@ -100,13 +100,14 @@ func (q *Queries) GetAlgorithmByType(ctx context.Context, type_ int16) (Algorith
 }
 
 const getAlgorithmNames = `-- name: GetAlgorithmNames :many
-SELECT text_id, name, type FROM algorithms
+SELECT text_id, name, type, position FROM algorithms
 `
 
 type GetAlgorithmNamesRow struct {
-	TextID string
-	Name   string
-	Type   int16
+	TextID   string
+	Name     string
+	Type     int16
+	Position int16
 }
 
 func (q *Queries) GetAlgorithmNames(ctx context.Context) ([]GetAlgorithmNamesRow, error) {
@@ -118,7 +119,12 @@ func (q *Queries) GetAlgorithmNames(ctx context.Context) ([]GetAlgorithmNamesRow
 	var items []GetAlgorithmNamesRow
 	for rows.Next() {
 		var i GetAlgorithmNamesRow
-		if err := rows.Scan(&i.TextID, &i.Name, &i.Type); err != nil {
+		if err := rows.Scan(
+			&i.TextID,
+			&i.Name,
+			&i.Type,
+			&i.Position,
+		); err != nil {
 			return nil, err
 		}
 		items = append(items, i)

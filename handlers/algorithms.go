@@ -19,9 +19,7 @@ func (h *DefaultHandler) HandleAlgorithmsPage(c echo.Context) error {
 	var algorithms []models.AlgorithmName
 
 	for _, algorithm := range dbAlgorithms {
-		model := models.ToAlgorithmName(algorithm)
-
-		algorithms = append(algorithms, model)
+		algorithms = append(algorithms, models.ToAlgorithmName(algorithm))
 	}
 
 	return render(c, pages.Algorithms(algorithms))

@@ -15,16 +15,18 @@ const (
 )
 
 type AlgorithmName struct {
-	TextId string
-	Name   string
-	Type   int16
+	TextId   string
+	Name     string
+	Type     int16
+	Position int16
 }
 
 func ToAlgorithmName(dbModel database.GetAlgorithmNamesRow) AlgorithmName {
 	return AlgorithmName{
-		TextId: dbModel.TextID,
-		Name:   dbModel.Name,
-		Type:   dbModel.Type,
+		TextId:   dbModel.TextID,
+		Name:     dbModel.Name,
+		Type:     dbModel.Type,
+		Position: dbModel.Position,
 	}
 }
 
@@ -53,6 +55,7 @@ func AddAlgorithmToDB(db *database.Queries, model Algorithm) (int32, error) {
 		TextID:      model.TextId,
 		Name:        model.Name,
 		Type:        int16(model.Type),
+		Position:    model.Position,
 		Explanation: model.Explanation,
 	})
 }

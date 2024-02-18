@@ -33,5 +33,5 @@ CREATE TABLE algorithm_code (
 
 -- +goose Down
 DROP TABLE users;
-DROP TABLE algorithm_code_files;
+DROP TABLE algorithm_code;
 DROP TABLE algorithms;

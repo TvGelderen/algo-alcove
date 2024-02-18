@@ -41,4 +41,4 @@ SELECT * FROM algorithms
 WHERE type = $1;
 
 -- name: GetAlgorithmNames :many
-SELECT text_id, name, type FROM algorithms;
+SELECT text_id, name, type, position FROM algorithms;

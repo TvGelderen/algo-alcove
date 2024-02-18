@@ -5,6 +5,7 @@ import (
 
     "github.com/TvGelderen/algo-alcove/view/layout"
     "github.com/TvGelderen/algo-alcove/models"
+	"sort"
 )
 
 func getAlgorithmsOfType(algorithms []models.AlgorithmName, algorithmType models.AlgorithmType) (retVal []models.AlgorithmName) {
@@ -13,6 +14,10 @@ func getAlgorithmsOfType(algorithms []models.AlgorithmName, algorithmType models
 			retVal = append(retVal, algorithm)
 		}
 	}
+    sort.SliceStable(retVal, func(i, j int) bool {
+        return retVal[i].Position < retVal[j].Position
+    })
+    
 	return
 }
 
