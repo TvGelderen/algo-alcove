@@ -2,9 +2,14 @@ package handlers
 
 import (
 	"github.com/TvGelderen/algo-alcove/types"
+	"github.com/TvGelderen/algo-alcove/view/layout"
 	"github.com/TvGelderen/algo-alcove/view/pages"
 	"github.com/labstack/echo/v4"
 )
+
+func HandleBasePage(c echo.Context) error {
+    return render(c, layout.Base())
+}
 
 func HandleHomePage(c echo.Context) error {
     return render(c, pages.Home())

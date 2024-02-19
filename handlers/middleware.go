@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/TvGelderen/algo-alcove/models"
 	"github.com/TvGelderen/algo-alcove/utils"
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
@@ -30,7 +31,7 @@ func AuthorizePage(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		id := c.Get("user-id")
 		if id == nil {
-			return c.Redirect(302, "/login")
+            return redirect(c, "/login")
 		}
 
 		return next(c)
@@ -44,7 +45,7 @@ func (h *DefaultHandler) DefaultPageMiddleware(next echo.HandlerFunc) echo.Handl
 			user, err := h.DB.GetUserById(c.Request().Context(), id.(uuid.UUID))
 			if err == nil {
                 ctx := c.Request().Context()
-                ctx = context.WithValue(ctx, "user-email", user.Email)
+                ctx = context.WithValue(ctx, "user", models.ToUser(user))
                 c.SetRequest(c.Request().WithContext(ctx))
             }
 		}

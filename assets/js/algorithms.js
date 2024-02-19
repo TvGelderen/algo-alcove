@@ -1,7 +1,7 @@
-const sideNav = document.getElementById('side-nav');
-const algorithmContent = document.getElementById('algorithm-content')
-
 function initAglorithmsPage() {
+    const sideNav = document.getElementById('side-nav');
+    const algorithmContent = document.getElementById('algorithm-content')
+
     if (sideNav && algorithmContent) {
         const links = sideNav.querySelectorAll('.nav-link');
 

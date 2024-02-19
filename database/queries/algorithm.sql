@@ -24,7 +24,13 @@ WHERE id = $1;
 
 -- name: UpdateAlgorithmPosition :exec
 UPDATE algorithms
-SET position = $2,
+SET position = $2, 
+    updated_at = timezone('utc', NOW()) 
+WHERE id = $1;
+
+-- name: UpdateAlgorithmHasCode :exec
+UPDATE algorithms
+SET has_code = $2,
     updated_at = timezone('utc', NOW()) 
 WHERE id = $1;
 

@@ -37,6 +37,7 @@ type Algorithm struct {
 	Type        AlgorithmType
 	Position    int16
 	Explanation string
+	HasCode     bool
 }
 
 func ToAlgorithm(dbModel database.Algorithm) Algorithm {
@@ -47,6 +48,7 @@ func ToAlgorithm(dbModel database.Algorithm) Algorithm {
 		Type:        AlgorithmType(dbModel.Type),
 		Position:    dbModel.Position,
 		Explanation: dbModel.Explanation,
+		HasCode:     dbModel.HasCode,
 	}
 }
 

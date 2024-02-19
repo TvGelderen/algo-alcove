@@ -8,8 +8,12 @@
     @apply indent-6 mt-4;
 }
 
+.nav-link-header {
+    @apply select-none;
+}
+
 .nav-link {
-    @apply hover:text-theme/75 cursor-pointer;
+    @apply hover:text-theme/75 cursor-pointer select-none;
 }
 
 .nav-link.active {

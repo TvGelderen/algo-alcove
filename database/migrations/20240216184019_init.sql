@@ -16,6 +16,7 @@ CREATE TABLE algorithms (
     type SMALLINT NOT NULL,
     position SMALLINT NOT NULL,
     explanation TEXT NOT NULL,
+    has_code BOOLEAN NOT NULL DEFAULT FALSE,
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );

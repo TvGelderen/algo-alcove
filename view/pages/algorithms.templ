@@ -1,10 +1,9 @@
 package pages
 
 import (
-    "fmt"
+	"fmt"
 
-    "github.com/TvGelderen/algo-alcove/view/layout"
-    "github.com/TvGelderen/algo-alcove/models"
+	"github.com/TvGelderen/algo-alcove/models"
 	"sort"
 )
 
@@ -14,40 +13,37 @@ func getAlgorithmsOfType(algorithms []models.AlgorithmName, algorithmType models
 			retVal = append(retVal, algorithm)
 		}
 	}
-    sort.SliceStable(retVal, func(i, j int) bool {
-        return retVal[i].Position < retVal[j].Position
-    })
-    
+	sort.SliceStable(retVal, func(i, j int) bool {
+		return retVal[i].Position < retVal[j].Position
+	})
+
 	return
 }
 
 templ Algorithms(algorithms []models.AlgorithmName) {
-	@layout.Base() {
-		<div class="grid grid-cols-[280px_1fr] gap-x-8">
-			<div>
-				<div id="side-nav" class="bg-secondary flex flex-col p-4">
-					<p class="text-xl">Sorting</p>
-					<div class="pl-4">
-						<p class="nav-link" data-href="/algorithms/sorting">About</p>
-						for _, algorithm := range getAlgorithmsOfType(algorithms, models.AlgoritmhTypeSorting) {
-                            <p class="nav-link" data-href={ fmt.Sprintf("/algorithms/sorting/%v", algorithm.TextId) }>{ algorithm.Name }</p>
-						}
-					</div>
-					<p class="text-xl">Path finding</p>
-					<div class="pl-4">
-						<p class="nav-link" data-href="/algorithms/pathfinding">About</p>
-						for _, algorithm := range getAlgorithmsOfType(algorithms, models.AlgoritmhTypePathFinding) {
-                            <p class="nav-link" data-href={ fmt.Sprintf("/algorithms/pathfinding/%v", algorithm.TextId) }>{ algorithm.Name }</p>
-						}
-					</div>
+	<div class="grid grid-cols-[280px_1fr] gap-x-8">
+		<div>
+			<div id="side-nav" class="bg-secondary flex flex-col p-4">
+				<p class="text-xl">Sorting</p>
+				<div class="pl-4">
+					<p class="nav-link" data-href="/algorithms/sorting">About</p>
+					for _, algorithm := range getAlgorithmsOfType(algorithms, models.AlgoritmhTypeSorting) {
+						<p class="nav-link" data-href={ fmt.Sprintf("/algorithms/sorting/%v", algorithm.TextId) }>{ algorithm.Name }</p>
+					}
+				</div>
+				<p class="text-xl">Path finding</p>
+				<div class="pl-4">
+					<p class="nav-link" data-href="/algorithms/pathfinding">About</p>
+					for _, algorithm := range getAlgorithmsOfType(algorithms, models.AlgoritmhTypePathFinding) {
+						<p class="nav-link" data-href={ fmt.Sprintf("/algorithms/pathfinding/%v", algorithm.TextId) }>{ algorithm.Name }</p>
+					}
 				</div>
 			</div>
-			<div
-				id="algorithm-content"
-				hx-get="/api/algorithms"
-				hx-trigger="load"
-			></div>
 		</div>
-		<script type="text/javascript" src="/assets/js/algorithms.js"></script>
-	}
+		<div
+			id="algorithm-content"
+			hx-trigger="load"
+		></div>
+	</div>
+	<script type="text/javascript" src="/assets/js/algorithms.js"></script>
 }

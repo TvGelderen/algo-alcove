@@ -37,7 +37,7 @@ func (q *Queries) CreateAlgorithm(ctx context.Context, arg CreateAlgorithmParams
 }
 
 const getAlgorithmById = `-- name: GetAlgorithmById :one
-SELECT id, text_id, name, type, position, explanation, created_at, updated_at FROM algorithms
+SELECT id, text_id, name, type, position, explanation, has_code, created_at, updated_at FROM algorithms
 WHERE id = $1
 `
 
@@ -51,6 +51,7 @@ func (q *Queries) GetAlgorithmById(ctx context.Context, id int32) (Algorithm, er
 		&i.Type,
 		&i.Position,
 		&i.Explanation,
+		&i.HasCode,
 		&i.CreatedAt,
 		&i.UpdatedAt,
 	)
@@ -58,7 +59,7 @@ func (q *Queries) GetAlgorithmById(ctx context.Context, id int32) (Algorithm, er
 }
 
 const getAlgorithmByTextId = `-- name: GetAlgorithmByTextId :one
-SELECT id, text_id, name, type, position, explanation, created_at, updated_at FROM algorithms
+SELECT id, text_id, name, type, position, explanation, has_code, created_at, updated_at FROM algorithms
 WHERE text_id = $1
 `
 
@@ -72,6 +73,7 @@ func (q *Queries) GetAlgorithmByTextId(ctx context.Context, textID string) (Algo
 		&i.Type,
 		&i.Position,
 		&i.Explanation,
+		&i.HasCode,
 		&i.CreatedAt,
 		&i.UpdatedAt,
 	)
@@ -79,7 +81,7 @@ func (q *Queries) GetAlgorithmByTextId(ctx context.Context, textID string) (Algo
 }
 
 const getAlgorithmByType = `-- name: GetAlgorithmByType :one
-SELECT id, text_id, name, type, position, explanation, created_at, updated_at FROM algorithms
+SELECT id, text_id, name, type, position, explanation, has_code, created_at, updated_at FROM algorithms
 WHERE type = $1
 `
 
@@ -93,6 +95,7 @@ func (q *Queries) GetAlgorithmByType(ctx context.Context, type_ int16) (Algorith
 		&i.Type,
 		&i.Position,
 		&i.Explanation,
+		&i.HasCode,
 		&i.CreatedAt,
 		&i.UpdatedAt,
 	)
@@ -174,6 +177,23 @@ func (q *Queries) UpdateAlgorithmExplanation(ctx context.Context, arg UpdateAlgo
 	return err
 }
 
+const updateAlgorithmHasCode = `-- name: UpdateAlgorithmHasCode :exec
+UPDATE algorithms
+SET has_code = $2,
+    updated_at = timezone('utc', NOW()) 
+WHERE id = $1
+`
+
+type UpdateAlgorithmHasCodeParams struct {
+	ID      int32
+	HasCode bool
+}
+
+func (q *Queries) UpdateAlgorithmHasCode(ctx context.Context, arg UpdateAlgorithmHasCodeParams) error {
+	_, err := q.db.ExecContext(ctx, updateAlgorithmHasCode, arg.ID, arg.HasCode)
+	return err
+}
+
 const updateAlgorithmName = `-- name: UpdateAlgorithmName :exec
 UPDATE algorithms
 SET name = $2, 
@@ -193,7 +213,7 @@ func (q *Queries) UpdateAlgorithmName(ctx context.Context, arg UpdateAlgorithmNa
 
 const updateAlgorithmPosition = `-- name: UpdateAlgorithmPosition :exec
 UPDATE algorithms
-SET position = $2,
+SET position = $2, 
     updated_at = timezone('utc', NOW()) 
 WHERE id = $1
 `

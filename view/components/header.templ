@@ -1,11 +1,13 @@
 package components
 
-func getEmail(ctx context.Context) string {
-	email := ctx.Value("user-email")
-	if email != nil {
-		return email.(string)
+import "github.com/TvGelderen/algo-alcove/models"
+
+func getEmail(ctx context.Context) (string, bool) {
+	user := ctx.Value("user")
+	if user != nil {
+		return user.(models.User).Email, true
 	}
-	return ""
+	return "", false
 }
 
 templ Header() {
@@ -21,20 +23,20 @@ templ Header() {
 				<div class="md:hidden mb-6 text-3xl text-theme">
 					AlgoAlcove
 				</div>
-				<div id="nav-links" class="text-2xl flex flex-col gap-y-2 md:block">
-					<a class="nav-link md:ml-2" href="/">Home</a>
-					<a class="nav-link md:ml-2" href="/algorithms">Algorithms</a>
+				<div id="nav-links" class="text-2xl flex flex-col md:flex-row gap-y-2">
+					<p class="nav-link md:ml-6" data-href="/">Home</p>
+					<p class="nav-link md:ml-6" data-href="/algorithms">Algorithms</p>
 				</div>
 				<div class="md:hidden w-full my-4 border-b-[1px] border-b-tertiary"></div>
-				if email := getEmail(ctx); email != "" {
+				if email, ok := getEmail(ctx); ok {
 					<div class="flex items-center">
 						<div class="mr-2 mb-2 md:mb-0">Hi, { email }!</div>
-						<a class="button secondary" href="/api/logout">Logout</a>
+						<button class="button secondary" data-href="/api/logout">Logout</button>
 					</div>
 				} else {
 					<div class="flex">
-						<a class="button secondary mr-2" href="/login">Login</a>
-						<a class="button" href="/register">Register</a>
+						<button class="button secondary mr-2" data-href="/login">Login</button>
+						<button class="button" data-href="/register">Register</button>
 					</div>
 				}
 			</nav>
@@ -42,6 +44,5 @@ templ Header() {
 		<div class="menu-icon-wrapper md:hidden">
 			<div class="menu-icon"></div>
 		</div>
-        <script type="text/javascript" src="/assets/js/header.js"></script>
 	</header>
 }

@@ -29,6 +29,15 @@ func HandleAlgorithmsAbout(c echo.Context) error {
 	return render(c, algorithms.About())
 }
 
+func HandleAlgorithmsSortingAbout(c echo.Context) error {
+	return render(c, algorithms.Sorting())
+}
+
+func HandleAlgorithmsPathFindingAbout(c echo.Context) error {
+	return render(c, algorithms.PathFinding())
+}
+
+
 func (h *DefaultHandler) HandleAlgorithm(c echo.Context) error {
 	algorithmType := c.Param("type")
 	algorithmName := c.Param("algorithm")
@@ -42,13 +51,13 @@ func (h *DefaultHandler) HandleAlgorithm(c echo.Context) error {
 
 	algorithm, err := h.DB.GetAlgorithmByTextId(c.Request().Context(), algorithmName)
 	if err != nil {
-		return render(c, pages.NotFound())
+        return redirect(c, "/404")
 	}
 
 	return render(c, algorithms.Algorithm(models.ToAlgorithm(algorithm)))
 }
 
-func (h *DefaultHandler) HandleGetAlogritmCode(c echo.Context) error {
+func (h *DefaultHandler) HandleGetAlogrithmCode(c echo.Context) error {
 	algorithmIdParam := c.Param("algorithmId")
 	algorithmId, err := strconv.ParseInt(algorithmIdParam, 10, 32)
 	if err != nil {

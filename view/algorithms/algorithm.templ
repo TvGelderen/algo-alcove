@@ -10,14 +10,16 @@ templ Algorithm(algorithm models.Algorithm) {
 	<div class="article">
 		@templ.Raw(algorithm.Explanation)
 	</div>
-	<div
-		class="mt-8"
-		hx-get={ fmt.Sprintf("/api/algorithms/%v/code", algorithm.Id) }
-		hx-trigger="load"
-		hx-on::after-request="codeFetched(event)"
-	>
-		<div class="bg-secondary w-full min-h-[320px] flex justify-center items-center">
-			<div class="loader"></div>
+	if algorithm.HasCode {
+		<div
+			class="mt-8"
+			hx-get={ fmt.Sprintf("/api/algorithms/%v/code", algorithm.Id) }
+			hx-trigger="load"
+			hx-on::after-request="codeFetched(event)"
+		>
+			<div class="bg-secondary w-full min-h-[320px] flex justify-center items-center">
+				<div class="loader"></div>
+			</div>
 		</div>
-	</div>
+	}
 }
