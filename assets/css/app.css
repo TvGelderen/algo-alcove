@@ -43,3 +43,19 @@ label.error {
 input:has(+label.error) {
     @apply border-red-400;
 }
+
+.loader {
+    @apply w-[50px] h-[50px] border-[6px] border-gray-600 border-t-theme/75;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

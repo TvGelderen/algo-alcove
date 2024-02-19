@@ -12,22 +12,24 @@ import (
 )
 
 const createUser = `-- name: CreateUser :exec
-INSERT INTO users (id, username, email, password_hash, created_at, updated_at)
-VALUES ($1, $2, $3, $4, timezone('utc', NOW()), timezone('utc', NOW()))
+INSERT INTO users (id, email, username, role, password_hash, created_at, updated_at)
+VALUES ($1, $2, $3, $4, $5, timezone('utc', NOW()), timezone('utc', NOW()))
 `
 
 type CreateUserParams struct {
 	ID           uuid.UUID
-	Username     string
 	Email        string
+	Username     string
+	Role         string
 	PasswordHash []byte
 }
 
 func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) error {
 	_, err := q.db.ExecContext(ctx, createUser,
 		arg.ID,
-		arg.Username,
 		arg.Email,
+		arg.Username,
+		arg.Role,
 		arg.PasswordHash,
 	)
 	return err

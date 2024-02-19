@@ -21,7 +21,7 @@ function initAglorithmsPage() {
         const updateLinks = () => {
             for (const link of links) {
                 if (link.innerText == "About") {
-                    if (window.location.origin + link.dataset.href == window.location.href) {
+                    if (link.dataset.href == window.location.pathname) {
                         link.classList.add("active");
                     } else {
                         link.classList.remove("active");
