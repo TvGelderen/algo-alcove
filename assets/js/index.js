@@ -1,10 +1,26 @@
+let previousPathname = null;
 let pageContainer = null;
 
-window.addEventListener('load', event => {
+window.addEventListener('load', () => {
     pageContainer = document.getElementById('page-container');
 
     initHeader();
 });
+
+window.addEventListener('popstate', () => {
+    let previousPage = previousPathname.split('/')[1];
+    let currentPage = window.location.pathname.split('/')[1];
+
+    if (previousPage != currentPage) {
+        updatePageContent();
+    }
+});
+
+function updateUrl(path) {
+    const newUrl = window.location.origin + path;
+    window.history.pushState({ path: newUrl }, '', newUrl);
+    previousPathname = path;
+}
 
 function updatePageContent() {
     if (pageContainer) {
@@ -39,8 +55,7 @@ function initHeader() {
     const links = header.querySelectorAll('#nav-links .nav-link');
 
     const updateUrl = event => {
-        const newUrl = window.location.origin + event.target.dataset.href;
-        window.history.pushState({ path: newUrl }, '', newUrl);
+        updateUrl(event.target.dataset.href);
 
         updateLinks();
         updatePageContent();

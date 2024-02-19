@@ -5,17 +5,10 @@ function initAglorithmsPage() {
     if (sideNav && algorithmContent) {
         const links = sideNav.querySelectorAll('.nav-link');
 
-        const updateUrl = event => {
-            const newUrl = window.location.origin + event.target.dataset.href;
-            window.history.pushState({ path: newUrl }, '', newUrl);
-
-            updateHxGet();
+        const handleClick = event => {
+            updateUrl(event.target.dataset.href);
+            updateAlgorithmContent();
             updateLinks();
-        }
-
-        const updateHxGet = () => {
-            algorithmContent.setAttribute('hx-get', `/api${window.location.pathname}`);
-            htmx.process(algorithmContent);
         }
 
         const updateLinks = () => {
@@ -34,12 +27,22 @@ function initAglorithmsPage() {
             }
         }
 
-        updateHxGet();
+        const updateAlgorithmContent = () => {
+            algorithmContent.setAttribute('hx-get', `/api${window.location.pathname}`);
+            htmx.process(algorithmContent);
+        }
+
+        updateAlgorithmContent();
         updateLinks();
 
         for (const link of links) {
-            link.addEventListener('click', updateUrl);
+            link.addEventListener('click', handleClick);
         }
+
+        window.addEventListener('popstate', () => {
+            updateAlgorithmContent();
+            updateLinks();
+        });
     }
 }
 
