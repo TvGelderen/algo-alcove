@@ -1,7 +1,7 @@
 let previousPathname = null;
 let pageContainer = null;
 
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
     pageContainer = document.getElementById('page-container');
 
     initHeader();
@@ -54,7 +54,7 @@ function initHeader() {
 
     const links = header.querySelectorAll('#nav-links .nav-link');
 
-    const updateUrl = event => {
+    const handleClick = event => {
         updateUrl(event.target.dataset.href);
 
         updateLinks();
@@ -81,6 +81,6 @@ function initHeader() {
     updatePageContent();
 
     for (const link of links) {
-        link.addEventListener('click', updateUrl);
+        link.addEventListener('click', handleClick);
     }
 }
