@@ -1,25 +1,29 @@
-let previousPathname = null;
+let previousPage = null;
 let pageContainer = null;
 
 document.addEventListener('DOMContentLoaded', () => {
+    previousPage = getCurrentPage();
     pageContainer = document.getElementById('page-container');
 
     initHeader();
 });
 
 window.addEventListener('popstate', () => {
-    let previousPage = previousPathname.split('/')[1];
-    let currentPage = window.location.pathname.split('/')[1];
+    let currentPage = getCurrentPage();
 
-    if (previousPage != currentPage) {
+    if (previousPage !== currentPage) {
+        previousPage = currentPage;
         updatePageContent();
     }
 });
 
+function getCurrentPage() {
+    return window.location.pathname.split('/')[1];
+}
+
 function updateUrl(path) {
     const newUrl = window.location.origin + path;
     window.history.pushState({ path: newUrl }, '', newUrl);
-    previousPathname = path;
 }
 
 function updatePageContent() {
