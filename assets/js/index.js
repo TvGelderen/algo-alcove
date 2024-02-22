@@ -3,18 +3,9 @@ let pageContainer = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     previousPage = getCurrentPage();
-    pageContainer = document.getElementById('page-container');
+    pageContainer = document.getElementById('page-content');
 
     initHeader();
-});
-
-window.addEventListener('popstate', () => {
-    let currentPage = getCurrentPage();
-
-    if (previousPage !== currentPage) {
-        previousPage = currentPage;
-        updatePageContent();
-    }
 });
 
 function getCurrentPage() {
@@ -89,4 +80,14 @@ function initHeader() {
     for (const link of links) {
         link.addEventListener('click', handleClick);
     }
+
+    window.addEventListener('popstate', () => {
+        let currentPage = getCurrentPage();
+
+        if (previousPage !== currentPage) {
+            previousPage = currentPage;
+            updatePageContent();
+            updateLinks();
+        }
+    });
 }
