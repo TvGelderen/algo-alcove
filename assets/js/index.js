@@ -23,7 +23,11 @@ function getCurrentPage() {
 
 function updateUrl(path) {
     const newUrl = window.location.origin + path;
-    window.history.pushState({ path: newUrl }, '', newUrl);
+    pushState(newUrl);
+}
+
+function pushState(url) {
+    window.history.pushState({ path: url }, '', url);
 }
 
 function updatePageContent() {
@@ -59,21 +63,19 @@ function initHeader() {
     const links = header.querySelectorAll('#nav-links .nav-link');
 
     const handleClick = event => {
-        updateUrl(event.target.dataset.href);
-
+        pushState(event.target.href);
         updateLinks();
-        updatePageContent();
     }
 
     const updateLinks = () => {
         for (const link of links) {
             if (link.innerText == "Home") {
-                if (link.dataset.href == window.location.pathname) {
+                if (link.href == window.location.href) {
                     link.classList.add("active");
                 } else {
                     link.classList.remove("active");
                 }
-            } else if (window.location.href.includes(link.dataset.href)) {
+            } else if (window.location.href.includes(link.href)) {
                 link.classList.add("active");
             } else {
                 link.classList.remove("active");

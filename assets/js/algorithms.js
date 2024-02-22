@@ -6,20 +6,19 @@ function initAglorithmsPage() {
         const links = sideNav.querySelectorAll('.nav-link');
 
         const handleClick = event => {
-            updateUrl(event.target.dataset.href);
-            updateAlgorithmContent();
+            pushState(event.target.href);
             updateLinks();
         }
 
         const updateLinks = () => {
             for (const link of links) {
                 if (link.innerText == "About") {
-                    if (link.dataset.href == window.location.pathname) {
+                    if (link.href == window.location.href) {
                         link.classList.add("active");
                     } else {
                         link.classList.remove("active");
                     }
-                } else if (window.location.href.includes(link.dataset.href)) {
+                } else if (window.location.href.includes(link.href)) {
                     link.classList.add("active");
                 } else {
                     link.classList.remove("active");

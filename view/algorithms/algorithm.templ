@@ -17,9 +17,7 @@ templ Algorithm(algorithm models.Algorithm) {
 			hx-trigger="load"
 			hx-on::after-request="codeFetched(event)"
 		>
-			<div class="bg-secondary w-full min-h-[320px] flex justify-center items-center">
-				<div class="loader"></div>
-			</div>
+            <div class="loader mx-auto"></div>
 		</div>
 	}
 }
