@@ -1,0 +1,20 @@
+package components
+
+type BreadCrumbLink struct {
+    Path  string
+    Title string
+}
+
+templ BreadCrumb(crumbs []BreadCrumbLink) {
+    <div class="flex flex-wrap text-lg md:text-xl mb-4">
+        <a href="/" class="nav-link material-icons">home</a>
+        for idx, crumb := range crumbs {
+            <span class="material-icons md:mx-[3px]">chevron_right</span>
+            if idx < len(crumbs) - 1 {
+                <a href={ templ.URL(crumb.Path) } class="nav-link">{ crumb.Title }</a>
+            } else {
+                <p class="inline-block text-theme/75">{ crumb.Title }</p>
+            }
+        }
+    </div>
+}

@@ -14,6 +14,28 @@ const (
 	AlgoritmhTypeOther
 )
 
+func (agorithmType AlgorithmType) AlgorithmTypeToString() string {
+    switch agorithmType{
+        case AlgoritmhTypeSorting:
+            return "Sorting"
+        case AlgoritmhTypePathFinding:
+            return "Path Finding"
+        default:
+            return ""
+    }
+}
+
+func (agorithmType AlgorithmType) AlgorithmTypeToPathString() string {
+    switch agorithmType{
+        case AlgoritmhTypeSorting:
+            return "sorting"
+        case AlgoritmhTypePathFinding:
+            return "pathfinding"
+        default:
+            return ""
+    }
+}
+
 type AlgorithmName struct {
 	TextId   string
 	Name     string

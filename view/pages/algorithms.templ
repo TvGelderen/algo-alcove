@@ -2,9 +2,9 @@ package pages
 
 import (
 	"fmt"
+	"sort"
 
 	"github.com/TvGelderen/algo-alcove/models"
-	"sort"
 )
 
 func getAlgorithmsOfType(algorithms []models.AlgorithmName, algorithmType models.AlgorithmType) (retVal []models.AlgorithmName) {
@@ -21,37 +21,35 @@ func getAlgorithmsOfType(algorithms []models.AlgorithmName, algorithmType models
 }
 
 templ Algorithms(algorithms []models.AlgorithmName) {
-	<div class="grid grid-cols-[280px_1fr] gap-x-8">
-		<div>
+	<div class="w-[95%] md:w-full mx-auto md:grid md:grid-cols-[280px_1fr] gap-x-8">
+		<div class="hidden md:block">
 			<div id="side-nav" class="bg-secondary flex flex-col p-4">
-				<p class="text-xl">Sorting</p>
+                <a
+                    href="/algorithms/sorting"
+                    hx-get="/api/algorithms/sorting"
+                    hx-target="#algorithm-content"
+                    class="nav-link text-xl"
+                >Sorting</a>
 				<div class="flex flex-col pl-4">
-					<a
-						href="/algorithms/sorting"
-						hx-get="/api/algorithms/sorting"
-						hx-target="#algorithm-content"
-						class="nav-link"
-					>About</a>
 					for _, algorithm := range getAlgorithmsOfType(algorithms, models.AlgoritmhTypeSorting) {
 						<a
-							href={ templ.SafeURL(fmt.Sprintf("/algorithms/sorting/%v", algorithm.TextId)) }
+							href={ templ.URL(fmt.Sprintf("/algorithms/sorting/%v", algorithm.TextId)) }
 							hx-get={ fmt.Sprintf("/api/algorithms/sorting/%v", algorithm.TextId) }
 							hx-target="#algorithm-content"
 							class="nav-link"
 						>{ algorithm.Name }</a>
 					}
 				</div>
-				<p class="text-xl">Path finding</p>
+                <a
+                    href="/algorithms/pathfinding"
+                    hx-get="/api/algorithms/pathfinding"
+                    hx-target="#algorithm-content"
+                    class="nav-link text-xl"
+                >Path Finding</a>
 				<div class="flex flex-col pl-4">
-					<a
-						href="/algorithms/pathfinding"
-						hx-get="/api/algorithms/pathfinding"
-						hx-target="#algorithm-content"
-						class="nav-link"
-					>About</a>
 					for _, algorithm := range getAlgorithmsOfType(algorithms, models.AlgoritmhTypePathFinding) {
 						<a
-							href={ templ.SafeURL(fmt.Sprintf("/algorithms/pathfinding/%v", algorithm.TextId)) }
+							href={ templ.URL(fmt.Sprintf("/algorithms/pathfinding/%v", algorithm.TextId)) }
 							hx-get={ fmt.Sprintf("/api/algorithms/pathfinding/%v", algorithm.TextId) }
 							hx-target="#algorithm-content"
 							class="nav-link"
@@ -60,10 +58,10 @@ templ Algorithms(algorithms []models.AlgorithmName) {
 				</div>
 			</div>
 		</div>
-		<div
-			id="algorithm-content"
-			hx-trigger="load"
-		></div>
+        <div
+            id="algorithm-content"
+            hx-trigger="load"
+        ></div>
 		<script defer type="text/javascript" src="/assets/js/algorithms.js"></script>
 	</div>
 }

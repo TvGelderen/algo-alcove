@@ -12,13 +12,7 @@ function initAglorithmsPage() {
 
         const updateLinks = () => {
             for (const link of links) {
-                if (link.innerText == "About") {
-                    if (link.href == window.location.href) {
-                        link.classList.add("active");
-                    } else {
-                        link.classList.remove("active");
-                    }
-                } else if (window.location.href.includes(link.href)) {
+                if (window.location.href.includes(link.href)) {
                     link.classList.add("active");
                 } else {
                     link.classList.remove("active");
@@ -39,6 +33,7 @@ function initAglorithmsPage() {
         }
 
         window.addEventListener('popstate', () => {
+            console.log('popstate');
             updateAlgorithmContent();
             updateLinks();
         });

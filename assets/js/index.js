@@ -1,3 +1,4 @@
+let navLinks = [];
 let previousPage = null;
 let pageContainer = null;
 
