@@ -9,3 +9,7 @@ templ:
 
 tailwind:
 	@npx tailwindcss -i assets/css/app.css -o assets/css/dist/style.css --watch
+
+build:
+	@npx tailwindcss -i assets/css/app.css -o assets/css/dist/style.css
+	@templ generate view
