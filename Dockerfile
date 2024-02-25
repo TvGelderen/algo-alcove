@@ -17,7 +17,6 @@ FROM debian:buster-slim
 WORKDIR /app
 COPY --from=builder /app/main .
 COPY --from=builder /app/assets assets
-COPY .env .
 
 EXPOSE 3000
 
