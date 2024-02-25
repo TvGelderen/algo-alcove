@@ -37,6 +37,11 @@ function initAglorithmsPage() {
             updateAlgorithmContent();
             updateLinks();
         });
+
+        code = algorithmContent.querySelector('code');
+        if (code) {
+            hljs.highlightElement(code);
+        }
     }
 }
 
