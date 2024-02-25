@@ -5,7 +5,6 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"net/http"
 	"os"
 
 	"github.com/TvGelderen/algo-alcove/handlers"
@@ -57,8 +56,7 @@ func main() {
 }
 
 func addRoutes(e *echo.Echo, h *handlers.DefaultHandler) {
-	fs := http.FileServer(http.Dir("assets"))
-	e.GET("/assets/*", echo.WrapHandler(http.StripPrefix("/assets/", fs)))
+	e.Static("/assets/*", "assets")
 
 	e.GET("/*", handlers.HandleBasePage, h.DefaultPageMiddleware)
 
