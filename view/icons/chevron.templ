@@ -1,0 +1,16 @@
+package icons
+
+templ Chevron(size string, direction string) {
+    @svg(size) {
+        switch (direction){
+            case "right":
+                <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"></path>
+            case "left":
+                <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/>
+            case "up":
+                <path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z"/>
+            case "down":
+                <path d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z"/>
+        }
+    }
+}

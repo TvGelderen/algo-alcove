@@ -25,6 +25,10 @@ func (h *DefaultHandler) HandleAlgorithmsPage(c echo.Context) error {
 	return render(c, pages.Algorithms(algorithms))
 }
 
+func HandleAlgorithmsStaticPage(c echo.Context) error {
+	return render(c, pages.AlgorithmsStatic())
+}
+
 func HandleAlgorithmsAbout(c echo.Context) error {
 	return render(c, algorithms.About())
 }
@@ -37,6 +41,9 @@ func HandleAlgorithmsPathFindingAbout(c echo.Context) error {
 	return render(c, algorithms.PathFinding())
 }
 
+func HandleBubbleSort(c echo.Context) error {
+	return render(c, algorithms.BubbleSort())
+}
 
 func (h *DefaultHandler) HandleAlgorithm(c echo.Context) error {
 	algorithmType := c.Param("type")
@@ -51,7 +58,7 @@ func (h *DefaultHandler) HandleAlgorithm(c echo.Context) error {
 
 	algorithm, err := h.DB.GetAlgorithmByTextId(c.Request().Context(), algorithmName)
 	if err != nil {
-        return redirect(c, "/404")
+		return redirect(c, "/404")
 	}
 
 	return render(c, algorithms.Algorithm(models.ToAlgorithm(algorithm)))

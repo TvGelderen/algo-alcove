@@ -1,0 +1,65 @@
+package pages
+
+import (
+	"fmt"
+
+	"github.com/TvGelderen/algo-alcove/models"
+)
+
+func getAlgorithms() []models.AlgorithmName {
+	return []models.AlgorithmName{
+		{
+			TextId:   "bubble-sort",
+			Name:     "Bubble Sort",
+			Type:     int16(models.AlgoritmhTypeSorting),
+			Position: 0,
+		},
+	}
+
+}
+
+templ AlgorithmsStatic() {
+	<div class="w-[95%] md:w-full mx-auto md:grid md:grid-cols-[280px_1fr] gap-x-8">
+		<div class="hidden md:block">
+			<div id="side-nav" class="bg-secondary flex flex-col p-4">
+                <a
+                    href="/algorithms/sorting"
+                    hx-get="/api/algorithms/sorting"
+                    hx-target="#algorithm-content"
+                    class="nav-link text-xl"
+                >Sorting</a>
+				<div class="flex flex-col pl-4">
+					for _, algorithm := range getAlgorithmsOfType(getAlgorithms(), models.AlgoritmhTypeSorting) {
+						<a
+							href={ templ.URL(fmt.Sprintf("/algorithms/sorting/%v", algorithm.TextId)) }
+							hx-get={ fmt.Sprintf("/api/algorithms/sorting/%v", algorithm.TextId) }
+							hx-target="#algorithm-content"
+							class="nav-link"
+						>{ algorithm.Name }</a>
+					}
+				</div>
+                <a
+                    href="/algorithms/pathfinding"
+                    hx-get="/api/algorithms/pathfinding"
+                    hx-target="#algorithm-content"
+                    class="nav-link text-xl"
+                >Path Finding</a>
+				<div class="flex flex-col pl-4">
+					for _, algorithm := range getAlgorithmsOfType(getAlgorithms(), models.AlgoritmhTypePathFinding) {
+						<a
+							href={ templ.URL(fmt.Sprintf("/algorithms/pathfinding/%v", algorithm.TextId)) }
+							hx-get={ fmt.Sprintf("/api/algorithms/pathfinding/%v", algorithm.TextId) }
+							hx-target="#algorithm-content"
+							class="nav-link"
+						>{ algorithm.Name }</a>
+					}
+				</div>
+			</div>
+		</div>
+        <div
+            id="algorithm-content"
+            hx-trigger="load"
+        ></div>
+		<script defer type="text/javascript" src="/assets/js/algorithms.js"></script>
+	</div>
+}

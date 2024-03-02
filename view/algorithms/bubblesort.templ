@@ -1,0 +1,29 @@
+package algorithms
+
+templ BubbleSort() {
+    <div></div>
+    @templ.Raw(`
+<pre class="text-md relative overflow-hidden max-w-full mb-6"><code class="language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">function</span> <span class="hljs-title function_">bubbleSort</span>(<span class="hljs-params">arr</span>) {
+    <span class="hljs-keyword">var</span> i, j;
+    <span class="hljs-keyword">var</span> len = arr.<span class="hljs-property">length</span>;
+    <span class="hljs-keyword">var</span> isSwapped = <span class="hljs-literal">false</span>;
+ 
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; len; i++) {
+        isSwapped = <span class="hljs-literal">false</span>;
+ 
+        <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt; (len - i - <span class="hljs-number">1</span>); j++) {
+            <span class="hljs-keyword">if</span> (arr[j] &gt; arr[j + <span class="hljs-number">1</span>]) {
+                <span class="hljs-keyword">var</span> temp = arr[j]
+                arr[j] = arr[j + <span class="hljs-number">1</span>];
+                arr[j + <span class="hljs-number">1</span>] = temp;
+                isSwapped = <span class="hljs-literal">true</span>;
+            }
+        }
+ 
+        <span class="hljs-keyword">if</span> (!isSwapped) {
+            <span class="hljs-keyword">break</span>;
+        }
+    }
+}</code></pre>
+    `)
+}
