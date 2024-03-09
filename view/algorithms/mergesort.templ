@@ -63,8 +63,10 @@ templ MergeSort() {
     <span class="hljs-keyword">if</span>(l &gt;= r) {
         <span class="hljs-keyword">return</span>;
     }
+
     <span class="hljs-keyword">var</span> m = l + <span class="hljs-built_in">parseInt</span>((r - l) / <span class="hljs-number">2</span>);
-    <span class="hljs-title function_">mergeSort</span>(arr,l, m);
+
+    <span class="hljs-title function_">mergeSort</span>(arr, l, m);
     <span class="hljs-title function_">mergeSort</span>(arr, m + <span class="hljs-number">1</span>, r);
     <span class="hljs-title function_">merge</span>(arr, l, m, r);
 }`)

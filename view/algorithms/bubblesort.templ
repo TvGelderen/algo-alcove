@@ -14,7 +14,14 @@ templ BubbleSort() {
             <p>The algorithm's name stems from the way smaller elements gradually rise to their proper places like bubbles in a liquid. Despite its elementary nature, Bubble Sort is often used in educational settings to introduce the concept of sorting algorithms. It serves as a hands-on demonstration of the basic principles involved in organizing data.</p>
             <p>One notable feature of Bubble Sort is its stability. In a stable sorting algorithm, the relative order of equal elements remains unchanged, and Bubble Sort excels in preserving this order. This makes it suitable for scenarios where maintaining the initial order of identical elements is crucial.</p>
         </div>
-        @components.Code("javascript", `<span class="hljs-keyword">function</span> <span class="hljs-title function_">bubbleSort</span>(<span class="hljs-params">arr</span>) {
+        @components.Code("javascript", `<span class="hljs-keyword">function</span> <span class="hljs-title function_">swap</span>(<span class="hljs-params">arr, a, b</span>) 
+{ 
+    <span class="hljs-keyword">var</span> temp = arr[a]; 
+    arr[a] = arr[b]; 
+    arr[b] = temp; 
+} 
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">bubbleSort</span>(<span class="hljs-params">arr</span>) {
     <span class="hljs-keyword">var</span> i, j;
     <span class="hljs-keyword">var</span> len = arr.<span class="hljs-property">length</span>;
     <span class="hljs-keyword">var</span> isSwapped = <span class="hljs-literal">false</span>;
@@ -24,9 +31,7 @@ templ BubbleSort() {
  
         <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt; (len - i - <span class="hljs-number">1</span>); j++) {
             <span class="hljs-keyword">if</span> (arr[j] &gt; arr[j + <span class="hljs-number">1</span>]) {
-                <span class="hljs-keyword">var</span> temp = arr[j]
-                arr[j] = arr[j + <span class="hljs-number">1</span>];
-                arr[j + <span class="hljs-number">1</span>] = temp;
+                <span class="hljs-title function_">swap</span>(arr, i, j); 
                 isSwapped = <span class="hljs-literal">true</span>;
             }
         }
@@ -36,5 +41,6 @@ templ BubbleSort() {
         }
     }
 }`)
+        @Visualize("bubble-sort")
     }
 }

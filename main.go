@@ -65,7 +65,6 @@ func addAlgorithmEndpoints(e *echo.Echo) {
 	e.GET("/algorithms", handlers.HandleAlgorithmsAbout)
 	e.GET("/algorithms/sorting", handlers.HandleAlgorithmsSortingAbout)
 	e.GET("/algorithms/pathfinding", handlers.HandleAlgorithmsPathFindingAbout)
-    
 	e.GET("/algorithms/sorting/bubble-sort", handlers.HandleBubbleSort)
 	e.GET("/algorithms/sorting/insertion-sort", handlers.HandleInsertionSort)
 	e.GET("/algorithms/sorting/selection-sort", handlers.HandleSelectionSort)

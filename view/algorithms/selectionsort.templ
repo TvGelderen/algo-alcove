@@ -22,14 +22,15 @@ templ SelectionSort() {
     arr[b] = temp; 
 } 
   
-<span class="hljs-keyword">function</span> <span class="hljs-title function_">selectionSort</span>(<span class="hljs-params">arr,  n</span>) 
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">selectionSort</span>(<span class="hljs-params">arr</span>) 
 { 
     <span class="hljs-keyword">var</span> i, j, min_idx; 
+    <span class="hljs-keyword">var</span> len = arr.<span class="hljs-property">length</span>;
   
-    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">1</span>; i++) 
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; len - <span class="hljs-number">1</span>; i++) 
     { 
         min_idx = i; 
-        <span class="hljs-keyword">for</span> (j = i + <span class="hljs-number">1</span>; j &lt; n; j++) 
+        <span class="hljs-keyword">for</span> (j = i + <span class="hljs-number">1</span>; j &lt; len; j++) 
         <span class="hljs-keyword">if</span> (arr[j] &lt; arr[min_idx]) {
             min_idx = j; 
 		}

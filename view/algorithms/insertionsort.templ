@@ -15,10 +15,12 @@ templ InsertionSort() {
 			<p>The step-by-step nature of Insertion Sort makes it a valuable tool for educational purposes. It provides a clear and intuitive introduction to the concepts of sorting algorithms, making it an ideal starting point for those new to the field.</p>
 		    <p>Insertion Sort's simplicity is reflected not only in its algorithmic steps but also in its minimal space requirements. It is an in-place sorting algorithm, meaning it sorts the data without requiring additional memory, making it memory-efficient for applications with tight constraints.</p>
         </div>
-        @components.Code("javascript", `<span class="hljs-keyword">function</span> <span class="hljs-title function_">insertionSort</span>(<span class="hljs-params">arr, n</span>)  
+        @components.Code("javascript", `<span class="hljs-keyword">function</span> <span class="hljs-title function_">insertionSort</span>(<span class="hljs-params">arr</span>)  
 {  
-    <span class="hljs-keyword">let</span> i, key, j;  
-    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt; n; i++) 
+    <span class="hljs-keyword">let</span> i, j, key;  
+    <span class="hljs-keyword">var</span> len = arr.<span class="hljs-property">length</span>;
+
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt; len; i++) 
     {  
         key = arr[i];  
         j = i - <span class="hljs-number">1</span>;  
