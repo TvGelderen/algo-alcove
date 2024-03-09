@@ -1,48 +1,51 @@
 package algorithms
 
 import "github.com/TvGelderen/algo-alcove/view/components"
+import "github.com/TvGelderen/algo-alcove/view/pages"
 
 templ About() {
-    @components.BreadCrumb([]components.BreadCrumbLink{
-    {
-        Path: "/algorithms",
-        Title: "Algorithms",
-    },
-    })
-    <h2 class="text-xl md:text-2xl">About</h2>
-    <div class="article">
-        <p>
-            In the intricate realm of computer science, algorithms stand as the unsung heroes, silently orchestrating the
-            digital ballet that shapes our modern world. Simply put, an algorithm is a set of instructions designed to
-            perform a specific task or solve a particular problem. From the mundane to the extraordinary, algorithms power
-            the functionality of virtually every digital system we interact with daily.
-        </p>
-        <p>
-            At their essence, algorithms are the driving force behind the efficiency and intelligence embedded in computer
-            programs. Whether it's the way search engines effortlessly retrieve relevant information or how social media
-            platforms curate personalized content, algorithms are the linchpin in these processes. Their role extends beyond
-            the virtual realm into our physical world, influencing the efficiency of transportation systems, optimizing
-            supply chain logistics, and even aiding medical diagnoses.
-        </p>
-        <p>
-            One of the key attributes of algorithms is their adaptability. They come in various shapes and sizes, each
-            tailored to address specific challenges. Sorting algorithms, for instance, organize data in a structured manner,
-            enhancing search and retrieval operations. Search algorithms efficiently locate desired information within vast
-            datasets. Machine learning algorithms, a subset gaining prominence, empower systems to learn and improve their
-            performance over time.
-        </p>
-        <p>
-            While algorithms are the digital workhorses, their impact extends beyond mere functionality. Ethical
-            considerations surrounding algorithms have gained prominence, emphasizing the need for transparency, fairness,
-            and accountability. Algorithms, when used in decision-making processes, must be crafted with care to avoid
-            biases and ensure equitable outcomes.
-        </p>
-        <p>
-            As we navigate the evolving landscape of technology, algorithms continue to be at the forefront of innovation.
-            Their refinement fuels breakthroughs in artificial intelligence, quantum computing, and data analysis,
-            propelling us into uncharted territories of possibility. In essence, algorithms are the architects of the
-            digital age, shaping our present and laying the foundation for a future where their influence is bound to deepen
-            and diversify.
-        </p>
-    </div>
+    @pages.Algorithms(){
+        @components.BreadCrumb([]components.BreadCrumbLink{
+        {
+            Path: "/algorithms",
+            Title: "Algorithms",
+        },
+        })
+        <h2 class="text-xl md:text-2xl">About</h2>
+        <div class="article">
+            <p>
+                In the intricate realm of computer science, algorithms stand as the unsung heroes, silently orchestrating the
+                digital ballet that shapes our modern world. Simply put, an algorithm is a set of instructions designed to
+                perform a specific task or solve a particular problem. From the mundane to the extraordinary, algorithms power
+                the functionality of virtually every digital system we interact with daily.
+            </p>
+            <p>
+                At their essence, algorithms are the driving force behind the efficiency and intelligence embedded in computer
+                programs. Whether it's the way search engines effortlessly retrieve relevant information or how social media
+                platforms curate personalized content, algorithms are the linchpin in these processes. Their role extends beyond
+                the virtual realm into our physical world, influencing the efficiency of transportation systems, optimizing
+                supply chain logistics, and even aiding medical diagnoses.
+            </p>
+            <p>
+                One of the key attributes of algorithms is their adaptability. They come in various shapes and sizes, each
+                tailored to address specific challenges. Sorting algorithms, for instance, organize data in a structured manner,
+                enhancing search and retrieval operations. Search algorithms efficiently locate desired information within vast
+                datasets. Machine learning algorithms, a subset gaining prominence, empower systems to learn and improve their
+                performance over time.
+            </p>
+            <p>
+                While algorithms are the digital workhorses, their impact extends beyond mere functionality. Ethical
+                considerations surrounding algorithms have gained prominence, emphasizing the need for transparency, fairness,
+                and accountability. Algorithms, when used in decision-making processes, must be crafted with care to avoid
+                biases and ensure equitable outcomes.
+            </p>
+            <p>
+                As we navigate the evolving landscape of technology, algorithms continue to be at the forefront of innovation.
+                Their refinement fuels breakthroughs in artificial intelligence, quantum computing, and data analysis,
+                propelling us into uncharted territories of possibility. In essence, algorithms are the architects of the
+                digital age, shaping our present and laying the foundation for a future where their influence is bound to deepen
+                and diversify.
+            </p>
+        </div>
+    }
 }

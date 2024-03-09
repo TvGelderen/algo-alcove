@@ -1,7 +1,3 @@
-let navLinks = [];
-let previousPage = null;
-let pageContainer = null;
-
 document.addEventListener('DOMContentLoaded', () => {
     previousPage = getCurrentPage();
     pageContainer = document.getElementById('page-content');
@@ -11,22 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function getCurrentPage() {
     return window.location.pathname.split('/')[1];
-}
-
-function updateUrl(path) {
-    const newUrl = window.location.origin + path;
-    pushState(newUrl);
-}
-
-function pushState(url) {
-    window.history.pushState({ path: url }, '', url);
-}
-
-function updatePageContent() {
-    if (pageContainer) {
-        pageContainer.setAttribute('hx-get', `/pages${window.location.pathname}`);
-        htmx.process(pageContainer);
-    }
 }
 
 function initHeader() {
@@ -54,41 +34,17 @@ function initHeader() {
 
     const links = header.querySelectorAll('#nav-links .nav-link');
 
-    const handleClick = event => {
-        pushState(event.target.href);
-        updateLinks();
-    }
-
-    const updateLinks = () => {
-        for (const link of links) {
-            if (link.innerText == "Home") {
-                if (link.href == window.location.href) {
-                    link.classList.add("active");
-                } else {
-                    link.classList.remove("active");
-                }
-            } else if (window.location.href.includes(link.href)) {
+    for (const link of links) {
+        if (link.innerText == "Home") {
+            if (link.href == window.location.href) {
                 link.classList.add("active");
             } else {
                 link.classList.remove("active");
             }
+        } else if (window.location.href.includes(link.href)) {
+            link.classList.add("active");
+        } else {
+            link.classList.remove("active");
         }
     }
-
-    updateLinks();
-    updatePageContent();
-
-    for (const link of links) {
-        link.addEventListener('click', handleClick);
-    }
-
-    window.addEventListener('popstate', () => {
-        let currentPage = getCurrentPage();
-
-        if (previousPage !== currentPage) {
-            previousPage = currentPage;
-            updatePageContent();
-            updateLinks();
-        }
-    });
 }

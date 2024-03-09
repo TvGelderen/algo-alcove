@@ -3,6 +3,7 @@ package pages
 import (
 	"github.com/TvGelderen/algo-alcove/view/components"
 	"github.com/TvGelderen/algo-alcove/types"
+	"github.com/TvGelderen/algo-alcove/view/layout"
 )
 
 templ Login(params types.LoginParams, errors types.LoginErrors) {
@@ -18,25 +19,27 @@ templ Login(params types.LoginParams, errors types.LoginErrors) {
 }
 
 templ LoginForm(params types.LoginParams, errors types.LoginErrors) {
-	@components.Input(components.InputParams{
-        Type:  "text",
-        Name:  "email",
-        Value: params.Email,
-        Label: "Email",
-        Error: errors.Email,
-    })
-	@components.Input(components.InputParams{
-        Type:  "password",
-        Name:  "password",
-        Value: params.Password,
-        Label: "Password",
-        Error: errors.Password,
-    })
-	if errors.Other != "" {
-		<p class="text-red-400">{ errors.Other }</p>
-	}
-	<div class="flex justify-between mt-4">
-		<button class="button" type="submit">Login</button>
-		<p class="ml-4">Don't have an account yet? <a href="/register" class="underline hover:text-theme">Register</a> here.</p>
-	</div>
+    @layout.Base(){
+        @components.Input(components.InputParams{
+            Type:  "text",
+            Name:  "email",
+            Value: params.Email,
+            Label: "Email",
+            Error: errors.Email,
+        })
+        @components.Input(components.InputParams{
+            Type:  "password",
+            Name:  "password",
+            Value: params.Password,
+            Label: "Password",
+            Error: errors.Password,
+        })
+        if errors.Other != "" {
+            <p class="text-red-400">{ errors.Other }</p>
+        }
+        <div class="flex justify-between mt-4">
+            <button class="button" type="submit">Login</button>
+            <p class="ml-4">Don't have an account yet? <a href="/register" class="underline hover:text-theme">Register</a> here.</p>
+        </div>
+    }
 }
