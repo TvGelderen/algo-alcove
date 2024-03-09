@@ -1,0 +1,50 @@
+package algorithms
+
+import ( 
+    "github.com/TvGelderen/algo-alcove/view/pages"
+    "github.com/TvGelderen/algo-alcove/view/components"
+)
+
+templ QuickSort() {
+    @pages.Algorithms(){
+        <h2 class="text-2xl md:text-3xl">Quick Sort</h2>
+        <div class="article">
+            <p>Enter Quick Sort, a swift and efficient maestro in the world of sorting algorithms. Renowned for its speed and versatility, Quick Sort employs a divide-and-conquer strategy to orchestrate a symphony of elements into a harmonious order.</p>
+            <p>At its core, Quick Sort operates by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays – those less than the pivot and those greater. The algorithm then recursively applies the same process to each sub-array, eventually leading to a fully sorted array. This divide-and-conquer strategy, coupled with its clever pivot selection, bestows Quick Sort with an average time complexity of O(n log n), making it a formidable contender in the realm of sorting algorithms.</p>
+            <p>One of the standout features of Quick Sort is its adaptability. Unlike some sorting algorithms that struggle with partially sorted data, Quick Sort excels in such scenarios. Its ability to quickly rearrange and conquer partial disorder contributes to its efficiency, making it a popular choice in various applications.</p>
+            <p>The efficiency of Quick Sort extends beyond its time complexity; it is an in-place sorting algorithm, meaning it doesn't require additional memory to function. This makes it particularly advantageous in situations where memory constraints are a consideration.</p>
+            <p>Despite its remarkable speed, Quick Sort is not immune to the worst-case scenario of O(n^2) time complexity, which occurs when the pivot selection consistently leads to unbalanced partitions. However, this drawback is often mitigated by using randomized pivot selection or other optimization techniques.</p>
+            <p>In the grand performance of sorting algorithms, Quick Sort emerges as a swift and adaptable maestro. Its ability to efficiently navigate through both ordered and disordered arrays, coupled with its minimal memory requirements, solidifies Quick Sort's position as a key player in the diverse repertoire of sorting techniques.</p>
+        </div>
+        @components.Code("javascript", `<span class="hljs-keyword">function</span> <span class="hljs-title function_">swap</span>(<span class="hljs-params">arr, a, b</span>) 
+{ 
+    <span class="hljs-keyword">var</span> temp = arr[a]; 
+    arr[a] = arr[b]; 
+    arr[b] = temp; 
+} 
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">partition</span>(<span class="hljs-params">arr, low, high</span>) {
+    <span class="hljs-keyword">let</span> pivot = arr[high];
+    <span class="hljs-keyword">let</span> i = low - <span class="hljs-number">1</span>;
+   
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = low; j &lt;= high - <span class="hljs-number">1</span>; j++) {
+        <span class="hljs-keyword">if</span> (arr[j] &lt; pivot) {
+            i++;
+            <span class="hljs-title function_">swap</span>(arr, i, j);
+        }
+    }
+   
+    <span class="hljs-title function_">swap</span>(arr, high, i + <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">return</span> i + <span class="hljs-number">1</span>;
+}
+ 
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">quickSort</span>(<span class="hljs-params">arr, low, high</span>) {
+    <span class="hljs-keyword">if</span> (low &lt; high) {
+        <span class="hljs-keyword">let</span> pi = <span class="hljs-title function_">partition</span>(arr, low, high);
+   
+        <span class="hljs-title function_">quickSort</span>(arr, low, pi - <span class="hljs-number">1</span>);
+        <span class="hljs-title function_">quickSort</span>(arr, pi + <span class="hljs-number">1</span>, high);
+    }
+}`)
+    }
+}

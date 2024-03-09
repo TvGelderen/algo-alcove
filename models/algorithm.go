@@ -36,19 +36,7 @@ type AlgorithmName struct {
 	Type     AlgorithmType
 }
 
-type Algorithm struct {
-	Id          int32
-	TextId      string
-	Name        string
-	Type        AlgorithmType
-	Position    int16
-	Explanation string
-	HasCode     bool
-}
-
 type AlgorithmCode struct {
-	Id          int32
-	AlgorithmId int32
 	Language    string
 	Code        string
 }

@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 .article p {
-    @apply indent-6 mt-4;
+    @apply indent-6 my-4;
 }
 
 .nav-link-header {

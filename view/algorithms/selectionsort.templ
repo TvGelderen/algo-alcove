@@ -1,0 +1,41 @@
+package algorithms
+
+import ( 
+    "github.com/TvGelderen/algo-alcove/view/pages"
+    "github.com/TvGelderen/algo-alcove/view/components"
+)
+
+templ SelectionSort() {
+    @pages.Algorithms(){
+        <h2 class="text-2xl md:text-3xl">Selection Sort</h2>
+        <div class="article">
+            <p>In the intricate world of sorting algorithms, Selection Sort emerges as a modest yet effective choreographer of order. Its simple and intuitive approach to arranging elements makes it a valuable player in the array of sorting techniques, demonstrating that sometimes, simplicity can be the key to success.</p>
+			<p>Selection Sort operates by dividing the array into two segments – the sorted and the unsorted. The algorithm repeatedly selects the smallest (or largest) element from the unsorted segment and swaps it with the first unsorted element. This process continues until the entire array is sorted. While Selection Sort's time complexity is quadratic, making it less efficient for large datasets, its straightforward implementation and minimal resource requirements contribute to its appeal.</p>
+		    <p>One of the notable characteristics of Selection Sort is its in-place nature. The algorithm sorts the data without requiring additional memory, making it memory-efficient and suitable for scenarios with limited resources.</p>
+			<p>Selection Sort's simplicity extends to its minimalistic code, making it an accessible choice for educational purposes. It serves as an excellent introductory sorting algorithm, allowing learners to grasp the fundamental concepts of sorting without the complexity of more advanced methods.</p>
+		    <p>While not the fastest algorithm in terms of time complexity, Selection Sort shines in scenarios where the dataset is small or nearly sorted. Its uncomplicated nature makes it suitable for applications where a quick and straightforward sorting solution is preferred over more complex algorithms.</p>
+        </div>
+        @components.Code("javascript", `<span class="hljs-keyword">function</span> <span class="hljs-title function_">swap</span>(<span class="hljs-params">arr, a, b</span>) 
+{ 
+    <span class="hljs-keyword">var</span> temp = arr[a]; 
+    arr[a] = arr[b]; 
+    arr[b] = temp; 
+} 
+  
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">selectionSort</span>(<span class="hljs-params">arr,  n</span>) 
+{ 
+    <span class="hljs-keyword">var</span> i, j, min_idx; 
+  
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">1</span>; i++) 
+    { 
+        min_idx = i; 
+        <span class="hljs-keyword">for</span> (j = i + <span class="hljs-number">1</span>; j &lt; n; j++) 
+        <span class="hljs-keyword">if</span> (arr[j] &lt; arr[min_idx]) {
+            min_idx = j; 
+		}
+  
+        <span class="hljs-title function_">swap</span>(arr, min_idx, i); 
+    } 
+}`)
+    }
+}

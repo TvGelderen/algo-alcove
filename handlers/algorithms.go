@@ -20,3 +20,19 @@ func HandleAlgorithmsPathFindingAbout(c echo.Context) error {
 func HandleBubbleSort(c echo.Context) error {
 	return render(c, algorithms.BubbleSort())
 }
+
+func HandleInsertionSort(c echo.Context) error {
+	return render(c, algorithms.InsertionSort())
+}
+
+func HandleSelectionSort(c echo.Context) error {
+	return render(c, algorithms.SelectionSort())
+}
+
+func HandleMergeSort(c echo.Context) error {
+	return render(c, algorithms.MergeSort())
+}
+
+func HandleQuickSort(c echo.Context) error {
+	return render(c, algorithms.QuickSort())
+}

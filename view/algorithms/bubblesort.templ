@@ -1,6 +1,9 @@
 package algorithms
 
-import "github.com/TvGelderen/algo-alcove/view/pages"
+import ( 
+    "github.com/TvGelderen/algo-alcove/view/pages"
+    "github.com/TvGelderen/algo-alcove/view/components"
+)
 
 templ BubbleSort() {
     @pages.Algorithms(){
@@ -11,8 +14,7 @@ templ BubbleSort() {
             <p>The algorithm's name stems from the way smaller elements gradually rise to their proper places like bubbles in a liquid. Despite its elementary nature, Bubble Sort is often used in educational settings to introduce the concept of sorting algorithms. It serves as a hands-on demonstration of the basic principles involved in organizing data.</p>
             <p>One notable feature of Bubble Sort is its stability. In a stable sorting algorithm, the relative order of equal elements remains unchanged, and Bubble Sort excels in preserving this order. This makes it suitable for scenarios where maintaining the initial order of identical elements is crucial.</p>
         </div>
-        @templ.Raw(`
-<pre class="text-md relative overflow-hidden max-w-full mb-6"><code class="language-javascript hljs" data-highlighted="yes"><span class="hljs-keyword">function</span> <span class="hljs-title function_">bubbleSort</span>(<span class="hljs-params">arr</span>) {
+        @components.Code("javascript", `<span class="hljs-keyword">function</span> <span class="hljs-title function_">bubbleSort</span>(<span class="hljs-params">arr</span>) {
     <span class="hljs-keyword">var</span> i, j;
     <span class="hljs-keyword">var</span> len = arr.<span class="hljs-property">length</span>;
     <span class="hljs-keyword">var</span> isSwapped = <span class="hljs-literal">false</span>;
@@ -33,7 +35,6 @@ templ BubbleSort() {
             <span class="hljs-keyword">break</span>;
         }
     }
-}</code></pre>
-        `)
+}`)
     }
 }
