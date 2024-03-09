@@ -4,8 +4,8 @@ templ Visualize(algorithm string) {
     <h3 class="text-xl md:text-2xl mt-6">Visiualze</h3>
     <div id="sorting-visualize-container" class="flex items-end w-full h-[500px] my-6"></div>
     <div class="flex">
-        <button class="button">Sort</button>
-        <button class="button secondary ml-4">Reset</button>
+        <button class="button" onclick="sort(event)" data-algorithm={ algorithm }>Sort</button>
+        <button class="button secondary ml-4" onclick="initializeVisualize()">Reset</button>
     </div>
     <script type="text/javascript" src="/assets/js/visualize.js"></script>
 }

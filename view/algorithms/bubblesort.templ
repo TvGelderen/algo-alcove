@@ -31,7 +31,7 @@ templ BubbleSort() {
  
         <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt; (len - i - <span class="hljs-number">1</span>); j++) {
             <span class="hljs-keyword">if</span> (arr[j] &gt; arr[j + <span class="hljs-number">1</span>]) {
-                <span class="hljs-title function_">swap</span>(arr, i, j); 
+                <span class="hljs-title function_">swap</span>(arr, j, j + 1); 
                 isSwapped = <span class="hljs-literal">true</span>;
             }
         }
