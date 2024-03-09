@@ -2,6 +2,7 @@ let arr;
 let visualizeContainer;
 let sorting;
 let reloading;
+let sortingDelay = 10;
 
 function initializeVisualize() {
     arr = [];
@@ -14,6 +15,13 @@ function initializeVisualize() {
 
     visualizeContainer = document.getElementById('sorting-visualize-container');
     if (!visualizeContainer) return;
+
+    const sortingDelayInput = document.getElementById('sorting-delay');
+    if (sortingDelayInput) {
+        sortingDelayInput.addEventListener('change', () => {
+            sortingDelay = parseInt(sortingDelayInput.value);
+        })
+    }
 
     visualizeContainer.innerHTML = '';
     for (let i = 0; i < arr.length; i++) {
@@ -79,7 +87,7 @@ async function swap(i, j) {
     select(i);
     select(j);
 
-    await new Promise(r => setTimeout(r, 10));
+    await new Promise(r => setTimeout(r, sortingDelay / 2));
 
     const temp = arr[i];
     arr[i] = arr[j];
@@ -88,7 +96,7 @@ async function swap(i, j) {
     visualizeContainer.insertBefore(visualizeContainer.children[i], visualizeContainer.children[j + 1]); 
     visualizeContainer.insertBefore(visualizeContainer.children[j], visualizeContainer.children[i + 1]); 
 
-    await new Promise(r => setTimeout(r, 10));
+    await new Promise(r => setTimeout(r, sortingDelay / 2));
 
     deselect(i);
     deselect(j);
