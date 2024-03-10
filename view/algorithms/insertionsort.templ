@@ -7,6 +7,20 @@ import (
 
 templ InsertionSort() {
     @pages.Algorithms(){
+        @components.BreadCrumb([]components.BreadCrumbLink{
+        {
+            Path: "/algorithms",
+            Title: "Algorithms",
+        },
+        {
+            Path: "/algorithms/sorting",
+            Title: "Sorting",
+        },
+        {
+            Path: "/algorithms/sorting/insertion-sort",
+            Title: "Insertion Sort",
+        },
+        })
         <h2 class="text-2xl md:text-3xl">Bubble Sort</h2>
         <div class="article">
             <p>In the realm of sorting algorithms, Insertion Sort stands out for its simplicity and elegance. Like a meticulous dance of elements, this algorithm efficiently arranges a list by iteratively placing unsorted elements into their correct positions within a sorted section of the array.</p>
@@ -18,7 +32,7 @@ templ InsertionSort() {
         @components.Code("javascript", `<span class="hljs-keyword">function</span> <span class="hljs-title function_">insertionSort</span>(<span class="hljs-params">arr</span>)  
 {  
     <span class="hljs-keyword">let</span> i, j, key;  
-    <span class="hljs-keyword">var</span> len = arr.<span class="hljs-property">length</span>;
+    <span class="hljs-keyword">let</span> len = arr.<span class="hljs-property">length</span>;
 
     <span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt; len; i++) 
     {  
@@ -33,5 +47,6 @@ templ InsertionSort() {
         arr[j + <span class="hljs-number">1</span>] = key;  
     }  
 }`)
+        @VisualizeSort("insertion-sort")
     }
 }

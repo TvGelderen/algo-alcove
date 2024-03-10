@@ -7,6 +7,20 @@ import (
 
 templ MergeSort() {
     @pages.Algorithms(){
+        @components.BreadCrumb([]components.BreadCrumbLink{
+        {
+            Path: "/algorithms",
+            Title: "Algorithms",
+        },
+        {
+            Path: "/algorithms/sorting",
+            Title: "Sorting",
+        },
+        {
+            Path: "/algorithms/sorting/merge-sort",
+            Title: "Merge Sort",
+        },
+        })
         <h2 class="text-2xl md:text-3xl">Merge Sort</h2>
         <div class="article">
             <p>Merge Sort, a sophisticated algorithm revered for its efficiency and stability, orchestrates a harmonious symphony of divide-and-conquer principles to elegantly sort arrays. Developed by John von Neumann in 1945, this algorithm has stood the test of time, becoming a staple in the world of sorting.</p>
@@ -17,22 +31,22 @@ templ MergeSort() {
         </div>
         @components.Code("javascript", `<span class="hljs-keyword">function</span> <span class="hljs-title function_">merge</span>(<span class="hljs-params">arr, l, m, r</span>)
 {
-    <span class="hljs-keyword">var</span> n1 = m - l + <span class="hljs-number">1</span>;
-    <span class="hljs-keyword">var</span> n2 = r - m;
+    <span class="hljs-keyword">let</span> n1 = m - l + <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">let</span> n2 = r - m;
  
-    <span class="hljs-keyword">var</span> L = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(n1); 
-    <span class="hljs-keyword">var</span> R = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(n2);
+    <span class="hljs-keyword">let</span> L = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(n1); 
+    <span class="hljs-keyword">let</span> R = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(n2);
  
-    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; n1; i++) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n1; i++) {
         L[i] = arr[l + i];
 	}
-    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> j = <span class="hljs-number">0</span>; j &lt; n2; j++) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; n2; j++) {
         R[j] = arr[m + <span class="hljs-number">1</span> + j];
 	}
  
-    <span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">var</span> j = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">var</span> k = l;
+    <span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">let</span> k = l;
  
     <span class="hljs-keyword">while</span> (i &lt; n1 &amp;&amp; j &lt; n2) {
         <span class="hljs-keyword">if</span> (L[i] &lt;= R[j]) {
@@ -60,15 +74,16 @@ templ MergeSort() {
 }
 
 <span class="hljs-keyword">function</span> <span class="hljs-title function_">mergeSort</span>(<span class="hljs-params">arr, l, r</span>){
-    <span class="hljs-keyword">if</span>(l &gt;= r) {
+    <span class="hljs-keyword">if</span> (l &gt;= r) {
         <span class="hljs-keyword">return</span>;
     }
 
-    <span class="hljs-keyword">var</span> m = l + <span class="hljs-built_in">parseInt</span>((r - l) / <span class="hljs-number">2</span>);
+    <span class="hljs-keyword">let</span> m = l + <span class="hljs-built_in">parseInt</span>((r - l) / <span class="hljs-number">2</span>);
 
     <span class="hljs-title function_">mergeSort</span>(arr, l, m);
     <span class="hljs-title function_">mergeSort</span>(arr, m + <span class="hljs-number">1</span>, r);
     <span class="hljs-title function_">merge</span>(arr, l, m, r);
 }`)
+        @VisualizeSort("merge-sort")
     }
 }

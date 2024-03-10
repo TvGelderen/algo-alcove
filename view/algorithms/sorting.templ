@@ -5,58 +5,56 @@ import "github.com/TvGelderen/algo-alcove/view/pages"
 
 templ Sorting() {
     @pages.Algorithms(){
-        <div>
-            @components.BreadCrumb([]components.BreadCrumbLink{
-            {
-                Path: "/algorithms",
-                Title: "Algorithms",
-            },
-            {
-                Path: "/algorithms/sorting",
-                Title: "Sorting",
-            },
-            })
-            <h2 class="text-xl md:text-2xl">Sorting</h2>
-            <div class="article">
-                <p>
-                    In the vast tapestry of computer science, sorting algorithms emerge as the meticulous weavers of order from
-                    the chaos of unorganized data. These algorithms, like skilled artisans, arrange elements in a specific
-                    sequence, facilitating efficient search, analysis, and retrieval processes. From the simplicity of Bubble
-                    Sort to the sophistication of Quick Sort, each sorting algorithm carries a unique set of instructions
-                    tailored to tackle the diverse challenges presented by different datasets.
-                </p>
-                <p>
-                    At the fundamental level, sorting algorithms operate on the principle of comparison, evaluating elements and
-                    rearranging them based on predetermined criteria. Bubble Sort, one of the simplest, iteratively compares
-                    adjacent elements and swaps them until the entire dataset is in order. While straightforward, its efficiency
-                    wanes with larger datasets. Insertion Sort builds the sorted portion of the dataset incrementally, similar
-                    to sorting a deck of cards. Selection Sort, on the other hand, repeatedly selects the smallest element and
-                    positions it in the sorted sequence.
-                </p>
-                <p>
-                    As datasets grow in complexity, more advanced algorithms come into play. Merge Sort employs a
-                    divide-and-conquer strategy, recursively breaking down the dataset into manageable fragments before
-                    reconstructing them in a sorted manner. Quick Sort, another divide-and-conquer method, introduces pivot
-                    elements, efficiently partitioning and sorting the dataset.
-                </p>
-                <p>
-                    Heap Sort takes a different approach, utilizing a binary heap data structure to orchestrate the sorting
-                    process. The heap ensures that the maximum (or minimum) element can be efficiently extracted, contributing
-                    to its consistent time complexity.
-                </p>
-                <p>
-                    Sorting algorithms extend beyond simple pairwise comparisons. Radix Sort operates on digits or groups of
-                    digits, while Bucket Sort distributes elements into buckets based on their values. These approaches showcase
-                    the adaptability of sorting algorithms to different types of data and scenarios.
-                </p>
-                <p>
-                    In the digital symphony of data processing, sorting algorithms play a crucial role, harmonizing the elements
-                    into a structured composition. Their diversity caters to a spectrum of needs, making them indispensable
-                    tools in the ever-expanding landscape of computer science. As technology evolves, the continuous refinement
-                    and exploration of sorting algorithms ensure that they remain not just a historical cornerstone but a
-                    dynamic force shaping the way we organize and interact with information.
-                </p>
-            </div>
+        @components.BreadCrumb([]components.BreadCrumbLink{
+        {
+            Path: "/algorithms",
+            Title: "Algorithms",
+        },
+        {
+            Path: "/algorithms/sorting",
+            Title: "Sorting",
+        },
+        })
+        <h2 class="text-xl md:text-2xl">Sorting</h2>
+        <div class="article">
+            <p>
+                In the vast tapestry of computer science, sorting algorithms emerge as the meticulous weavers of order from
+                the chaos of unorganized data. These algorithms, like skilled artisans, arrange elements in a specific
+                sequence, facilitating efficient search, analysis, and retrieval processes. From the simplicity of Bubble
+                Sort to the sophistication of Quick Sort, each sorting algorithm carries a unique set of instructions
+                tailored to tackle the diverse challenges presented by different datasets.
+            </p>
+            <p>
+                At the fundamental level, sorting algorithms operate on the principle of comparison, evaluating elements and
+                rearranging them based on predetermined criteria. Bubble Sort, one of the simplest, iteratively compares
+                adjacent elements and swaps them until the entire dataset is in order. While straightforward, its efficiency
+                wanes with larger datasets. Insertion Sort builds the sorted portion of the dataset incrementally, similar
+                to sorting a deck of cards. Selection Sort, on the other hand, repeatedly selects the smallest element and
+                positions it in the sorted sequence.
+            </p>
+            <p>
+                As datasets grow in complexity, more advanced algorithms come into play. Merge Sort employs a
+                divide-and-conquer strategy, recursively breaking down the dataset into manageable fragments before
+                reconstructing them in a sorted manner. Quick Sort, another divide-and-conquer method, introduces pivot
+                elements, efficiently partitioning and sorting the dataset.
+            </p>
+            <p>
+                Heap Sort takes a different approach, utilizing a binary heap data structure to orchestrate the sorting
+                process. The heap ensures that the maximum (or minimum) element can be efficiently extracted, contributing
+                to its consistent time complexity.
+            </p>
+            <p>
+                Sorting algorithms extend beyond simple pairwise comparisons. Radix Sort operates on digits or groups of
+                digits, while Bucket Sort distributes elements into buckets based on their values. These approaches showcase
+                the adaptability of sorting algorithms to different types of data and scenarios.
+            </p>
+            <p>
+                In the digital symphony of data processing, sorting algorithms play a crucial role, harmonizing the elements
+                into a structured composition. Their diversity caters to a spectrum of needs, making them indispensable
+                tools in the ever-expanding landscape of computer science. As technology evolves, the continuous refinement
+                and exploration of sorting algorithms ensure that they remain not just a historical cornerstone but a
+                dynamic force shaping the way we organize and interact with information.
+            </p>
         </div>
     }
 }

@@ -7,6 +7,20 @@ import (
 
 templ BubbleSort() {
     @pages.Algorithms(){
+        @components.BreadCrumb([]components.BreadCrumbLink{
+        {
+            Path: "/algorithms",
+            Title: "Algorithms",
+        },
+        {
+            Path: "/algorithms/sorting",
+            Title: "Sorting",
+        },
+        {
+            Path: "/algorithms/sorting/bubble-sort",
+            Title: "Bubble Sort",
+        },
+        })
         <h2 class="text-2xl md:text-3xl">Bubble Sort</h2>
         <div class="article">
             <p>Bubble Sort, though considered one of the simplest sorting algorithms, holds a unique place in the world of data organization. Devised as a basic introduction to sorting, it provides a straightforward approach to arranging elements in ascending or descending order.</p>
@@ -16,15 +30,15 @@ templ BubbleSort() {
         </div>
         @components.Code("javascript", `<span class="hljs-keyword">function</span> <span class="hljs-title function_">swap</span>(<span class="hljs-params">arr, a, b</span>) 
 { 
-    <span class="hljs-keyword">var</span> temp = arr[a]; 
+    <span class="hljs-keyword">let</span> temp = arr[a]; 
     arr[a] = arr[b]; 
     arr[b] = temp; 
 } 
 
 <span class="hljs-keyword">function</span> <span class="hljs-title function_">bubbleSort</span>(<span class="hljs-params">arr</span>) {
-    <span class="hljs-keyword">var</span> i, j;
-    <span class="hljs-keyword">var</span> len = arr.<span class="hljs-property">length</span>;
-    <span class="hljs-keyword">var</span> isSwapped = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">let</span> i, j;
+    <span class="hljs-keyword">let</span> len = arr.<span class="hljs-property">length</span>;
+    <span class="hljs-keyword">let</span> isSwapped = <span class="hljs-literal">false</span>;
  
     <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; len; i++) {
         isSwapped = <span class="hljs-literal">false</span>;
@@ -41,6 +55,6 @@ templ BubbleSort() {
         }
     }
 }`)
-        @Visualize("bubble-sort")
+        @VisualizeSort("bubble-sort")
     }
 }

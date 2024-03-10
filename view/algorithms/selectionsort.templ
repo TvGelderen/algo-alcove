@@ -7,6 +7,20 @@ import (
 
 templ SelectionSort() {
     @pages.Algorithms(){
+        @components.BreadCrumb([]components.BreadCrumbLink{
+        {
+            Path: "/algorithms",
+            Title: "Algorithms",
+        },
+        {
+            Path: "/algorithms/sorting",
+            Title: "Sorting",
+        },
+        {
+            Path: "/algorithms/sorting/selection-sort",
+            Title: "Selection Sort",
+        },
+        })
         <h2 class="text-2xl md:text-3xl">Selection Sort</h2>
         <div class="article">
             <p>In the intricate world of sorting algorithms, Selection Sort emerges as a modest yet effective choreographer of order. Its simple and intuitive approach to arranging elements makes it a valuable player in the array of sorting techniques, demonstrating that sometimes, simplicity can be the key to success.</p>
@@ -17,26 +31,28 @@ templ SelectionSort() {
         </div>
         @components.Code("javascript", `<span class="hljs-keyword">function</span> <span class="hljs-title function_">swap</span>(<span class="hljs-params">arr, a, b</span>) 
 { 
-    <span class="hljs-keyword">var</span> temp = arr[a]; 
+    <span class="hljs-keyword">let</span> temp = arr[a]; 
     arr[a] = arr[b]; 
     arr[b] = temp; 
 } 
   
 <span class="hljs-keyword">function</span> <span class="hljs-title function_">selectionSort</span>(<span class="hljs-params">arr</span>) 
 { 
-    <span class="hljs-keyword">var</span> i, j, min_idx; 
-    <span class="hljs-keyword">var</span> len = arr.<span class="hljs-property">length</span>;
+    <span class="hljs-keyword">let</span> i, j, min_idx; 
+    <span class="hljs-keyword">let</span> len = arr.<span class="hljs-property">length</span>;
   
     <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; len - <span class="hljs-number">1</span>; i++) 
     { 
         min_idx = i; 
-        <span class="hljs-keyword">for</span> (j = i + <span class="hljs-number">1</span>; j &lt; len; j++) 
-        <span class="hljs-keyword">if</span> (arr[j] &lt; arr[min_idx]) {
-            min_idx = j; 
-		}
+        <span class="hljs-keyword">for</span> (j = i + <span class="hljs-number">1</span>; j &lt; len; j++) {
+            <span class="hljs-keyword">if</span> (arr[j] &lt; arr[min_idx]) {
+                min_idx = j; 
+            }
+        }
   
         <span class="hljs-title function_">swap</span>(arr, min_idx, i); 
     } 
 }`)
+        @VisualizeSort("selection-sort")
     }
 }
