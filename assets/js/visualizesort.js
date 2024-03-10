@@ -10,7 +10,7 @@ function initializeVisualizeSort() {
     reloading = true;
 
     for (let i = 0; i < 100; i++) {
-        arr.push(Math.floor(Math.random() * 101));
+        arr.push(Math.floor(Math.random() * 100) + 1);
     }
 
     visualizeContainer = document.getElementById('sorting-visualize-container');
@@ -61,9 +61,13 @@ async function sort(event) {
             break;
         case 'merge-sort':
             await mergeSort(0, arr.length - 1);
-            console.log(arr);
+            break;
+        case 'quick-sort':
+            await quickSort(0, arr.length - 1);
             break;
     }
+
+    console.log(arr);
 
     sorting = false;
 }
@@ -83,7 +87,6 @@ async function bubbleSort() {
 
             select(j);
             select(j + 1);
-
             await sleep();
 
             if (arr[j] > arr[j + 1]) {
@@ -92,7 +95,6 @@ async function bubbleSort() {
             }
 
             await sleep();
-
             deselect(j);
             deselect(j + 1);
         }
@@ -123,7 +125,6 @@ async function insertionSort()
             }
 
             select(j);
-
             await sleep();
 
             arr[j + 1] = arr[j];
@@ -131,7 +132,6 @@ async function insertionSort()
             visualizeContainer.insertBefore(visualizeContainer.children[j + 1], visualizeContainer.children[j]); 
 
             await sleep();
-
             deselect(j);
             deselect(j + 1);
 
@@ -172,11 +172,8 @@ async function selectionSort()
         }
   
         await sleep();
-
         swap(min_idx, i);
-
         await sleep();
-
         deselect(i);
         deselect(min_idx);
     }
@@ -204,13 +201,11 @@ async function merge(l, m, r)
     while (i < n1 && j < n2) {
         if (L[i] <= R[j]) {
             arr[k] = L[i];
-            visualizeContainer.insertBefore(visualizeContainer.children[l + i], visualizeContainer.children[k]);
-            visualizeContainer.insertBefore(visualizeContainer.children[k], visualizeContainer.children[l + i]);
+            visualizeContainer.insertBefore(visualizeContainer.children[l + i], visualizeContainer.children[k + 1]);
             i++;
         } else {
             arr[k] = R[j];
-            visualizeContainer.insertBefore(visualizeContainer.children[m + 1 + j], visualizeContainer.children[k]); 
-            visualizeContainer.insertBefore(visualizeContainer.children[k], visualizeContainer.children[m + 1 + j]); 
+            visualizeContainer.insertBefore(visualizeContainer.children[m + 1 + j], visualizeContainer.children[k + 1]);
             j++;
         }
         k++;
@@ -218,16 +213,14 @@ async function merge(l, m, r)
  
     while (i < n1) {
         arr[k] = L[i];
-        visualizeContainer.insertBefore(visualizeContainer.children[l + i], visualizeContainer.children[k + 1]); 
-        visualizeContainer.insertBefore(visualizeContainer.children[k], visualizeContainer.children[l + i]); 
+        visualizeContainer.insertBefore(visualizeContainer.children[l + i], visualizeContainer.children[k + 1]);
         i++;
         k++;
     }
 
     while (j < n2) {
         arr[k] = R[j];
-        visualizeContainer.insertBefore(visualizeContainer.children[m + 1 + j], visualizeContainer.children[k + 1]); 
-        visualizeContainer.insertBefore(visualizeContainer.children[k], visualizeContainer.children[m + 1 + j]); 
+        visualizeContainer.insertBefore(visualizeContainer.children[m + 1 + j], visualizeContainer.children[k + 1]);
         j++;
         k++;
     }
@@ -240,9 +233,38 @@ async function mergeSort(l, r){
 
     let m = l + parseInt((r - l) / 2);
 
+    if (reloading) {
+        reloading = false;
+        return;
+    }
+
     await mergeSort(l, m);
     await mergeSort(m + 1, r);
     await merge(l, m, r);
+}
+
+async function partition(low, high) {
+    let pivot = arr[high];
+    let i = low - 1;
+   
+    for (let j = low; j < high; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            swap(i, j);
+        }
+    }
+
+    swap(high, i + 1);
+    return i + 1;
+}
+ 
+async function quickSort(low, high) {
+    if (low < high) {
+        let pi = await partition(low, high);
+
+        await quickSort(low, pi - 1);
+        await quickSort(pi + 1, high);
+    }
 }
 
 const sleep = async () => await new Promise(r => setTimeout(r, sortingDelay / 2));
@@ -252,8 +274,13 @@ function swap(i, j) {
     arr[i] = arr[j];
     arr[j] = temp;
 
-    visualizeContainer.insertBefore(visualizeContainer.children[i], visualizeContainer.children[j + 1]); 
-    visualizeContainer.insertBefore(visualizeContainer.children[j], visualizeContainer.children[i + 1]); 
+    if (i < j) {
+        visualizeContainer.insertBefore(visualizeContainer.children[i], visualizeContainer.children[j]);
+        visualizeContainer.insertBefore(visualizeContainer.children[j], visualizeContainer.children[i]);
+    } else {
+        visualizeContainer.insertBefore(visualizeContainer.children[j], visualizeContainer.children[i]);
+        visualizeContainer.insertBefore(visualizeContainer.children[i], visualizeContainer.children[j]);
+    }
 }
 
 function select(i) {
