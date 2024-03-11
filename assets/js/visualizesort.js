@@ -201,11 +201,17 @@ async function merge(l, m, r)
     while (i < n1 && j < n2) {
         if (L[i] <= R[j]) {
             arr[k] = L[i];
-            visualizeContainer.insertBefore(visualizeContainer.children[l + i], visualizeContainer.children[k + 1]);
+            if (k < l + 1) {
+                visualizeContainer.insertBefore(visualizeContainer.children[l + i], visualizeContainer.children[k]);
+                visualizeContainer.insertBefore(visualizeContainer.children[k + 1], visualizeContainer.children[l + i]);
+            }
             i++;
         } else {
             arr[k] = R[j];
-            visualizeContainer.insertBefore(visualizeContainer.children[m + 1 + j], visualizeContainer.children[k + 1]);
+            if (k < m + 1 + j) {
+                visualizeContainer.insertBefore(visualizeContainer.children[m + 1 + j], visualizeContainer.children[k]);
+                visualizeContainer.insertBefore(visualizeContainer.children[k + 1], visualizeContainer.children[m + 1 + j]);
+            }
             j++;
         }
         k++;
@@ -213,14 +219,20 @@ async function merge(l, m, r)
  
     while (i < n1) {
         arr[k] = L[i];
-        visualizeContainer.insertBefore(visualizeContainer.children[l + i], visualizeContainer.children[k + 1]);
+        if (k < l + 1) {
+            visualizeContainer.insertBefore(visualizeContainer.children[l + i], visualizeContainer.children[k]);
+            visualizeContainer.insertBefore(visualizeContainer.children[k + 1], visualizeContainer.children[l + i]);
+        }
         i++;
         k++;
     }
 
     while (j < n2) {
         arr[k] = R[j];
-        visualizeContainer.insertBefore(visualizeContainer.children[m + 1 + j], visualizeContainer.children[k + 1]);
+        if (k < m + 1 + j) {
+            visualizeContainer.insertBefore(visualizeContainer.children[m + 1 + j], visualizeContainer.children[k]);
+            visualizeContainer.insertBefore(visualizeContainer.children[k + 1], visualizeContainer.children[m + 1 + j]);
+        }
         j++;
         k++;
     }

@@ -1,0 +1,62 @@
+package algorithms
+
+import (
+	"github.com/TvGelderen/algo-alcove/view/pages"
+	"github.com/TvGelderen/algo-alcove/view/components"
+)
+
+templ DepthFirstSearch() {
+	@pages.Algorithms() {
+		@components.BreadCrumb([]components.BreadCrumbLink{
+			{
+				Path:  "/algorithms",
+				Title: "Algorithms",
+			},
+			{
+				Path:  "/algorithms/pathfinding",
+				Title: "Path Finding",
+			},
+			{
+				Title: "Depth-First Search",
+			},
+		})
+		<h2 class="text-2xl md:text-3xl">Depth-First Search</h2>
+		<div class="article">
+			<p>
+				Depth-First Search (DFS) is a fundamental algorithm in computer science that explores and traverses graphs and
+				trees by diving as deeply as possible into a branch before backtracking. This algorithm is widely employed in
+				various applications, from maze-solving to network analysis, owing to its simplicity and versatility.
+			</p>
+			<p>
+				DFS operates on the principle of recursion or utilizing a stack to keep track of nodes to be visited. Starting
+				from a designated node, DFS explores as far as possible along each branch before backtracking. This process
+				continues until all nodes have been visited or a specific condition is met.
+			</p>
+			<p>
+				One of the key advantages of DFS lies in its memory efficiency. Unlike Breadth-First Search, which requires a
+				queue to store all nodes at a particular level, DFS only needs to store a single path, making it well-suited for
+				scenarios with limited memory resources.
+			</p>
+			<p>
+				The algorithm is commonly used to solve problems involving connectivity, such as identifying connected components
+				in a graph. By traversing the graph in a depth-first manner, DFS can efficiently identify groups of
+				interconnected nodes.
+			</p>
+			<p>
+				Furthermore, DFS plays a pivotal role in topological sorting, a critical task in project scheduling and task
+				prioritization. By employing DFS, one can establish a linear ordering of nodes that preserves the precedence
+				relationships in a directed acyclic graph (DAG).
+			</p>
+			<p>
+				Despite its many strengths, DFS does have limitations. It may not always find the shortest path between two nodes
+				in a weighted graph, as it doesn't consider edge weights during traversal. Additionally, DFS can encounter
+				issues with infinite loops if not carefully implemented, emphasizing the need for proper termination conditions.
+			</p>
+			<p>
+				In conclusion, Depth-First Search is a powerful algorithm with widespread applications, offering a balance
+				between simplicity and efficiency. Its ability to explore intricate structures, coupled with its memory-friendly
+				nature, makes DFS a valuable tool in the toolkit of any computer scientist or programmer.
+			</p>
+		</div>
+	}
+}

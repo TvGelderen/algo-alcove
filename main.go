@@ -70,4 +70,8 @@ func addAlgorithmEndpoints(e *echo.Echo) {
 	e.GET("/algorithms/sorting/selection-sort", handlers.HandleSelectionSort)
 	e.GET("/algorithms/sorting/merge-sort", handlers.HandleMergeSort)
 	e.GET("/algorithms/sorting/quick-sort", handlers.HandleQuickSort)
+	e.GET("/algorithms/pathfinding/breadth-first-search", handlers.HandleBreadthFirstSearch)
+	e.GET("/algorithms/pathfinding/depth-first-search", handlers.HandleDepthFirstSearch)
+	e.GET("/algorithms/pathfinding/dijkstras-algorithm", handlers.HandleDijkstrasAlgorithm)
+	e.GET("/algorithms/pathfinding/a-star-algorithm", handlers.HandleAStarAlgorithm)
 }

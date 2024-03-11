@@ -12,7 +12,7 @@ templ BreadCrumb(crumbs []BreadCrumbLink) {
         <a href="/" class="nav-link material-icons">@icons.Home("24")</a>
         for idx, crumb := range crumbs {
             <span class="material-icons md:mx-[3px]">@icons.Chevron("24", "right")</span>
-            if idx < len(crumbs) - 1 {
+            if idx < len(crumbs) - 1 && crumb.Path != "" {
                 <a href={ templ.URL(crumb.Path) } class="nav-link">{ crumb.Title }</a>
             } else {
                 <p class="inline-block text-theme/75">{ crumb.Title }</p>

@@ -36,3 +36,19 @@ func HandleMergeSort(c echo.Context) error {
 func HandleQuickSort(c echo.Context) error {
 	return render(c, algorithms.QuickSort())
 }
+
+func HandleBreadthFirstSearch(c echo.Context) error {
+	return render(c, algorithms.BreadthFirstSearch())
+}
+
+func HandleDepthFirstSearch(c echo.Context) error {
+	return render(c, algorithms.DepthFirstSearch())
+}
+
+func HandleDijkstrasAlgorithm(c echo.Context) error {
+	return render(c, algorithms.DijkstrasAlgorithm())
+}
+
+func HandleAStarAlgorithm(c echo.Context) error {
+	return render(c, algorithms.AStarAlgorithm())
+}

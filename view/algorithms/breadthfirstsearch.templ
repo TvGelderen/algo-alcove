@@ -1,0 +1,61 @@
+package algorithms
+
+import (
+	"github.com/TvGelderen/algo-alcove/view/pages"
+	"github.com/TvGelderen/algo-alcove/view/components"
+)
+
+templ BreadthFirstSearch() {
+	@pages.Algorithms() {
+		@components.BreadCrumb([]components.BreadCrumbLink{
+			{
+				Path:  "/algorithms",
+				Title: "Algorithms",
+			},
+			{
+				Path:  "/algorithms/pathfinding",
+				Title: "Path Finding",
+			},
+			{
+				Title: "Breadth-First Search",
+			},
+		})
+		<h2 class="text-2xl md:text-3xl">Breadth-Frist Search</h2>
+		<div class="article">
+			<p>
+				Breadth-First Search (BFS) stands as a foundational algorithm in computer science, renowned for its ability to
+				systematically explore and traverse graphs and trees layer by layer. Unlike its counterpart, Depth-First Search,
+				BFS prioritizes breadth, making it an invaluable tool in numerous applications, ranging from network routing to
+				puzzle solving.
+			</p>
+			<p>
+				The core concept of BFS involves exploring all neighbors of a given node before moving on to the next level of
+				nodes. This systematic approach ensures that BFS uncovers the shortest path from a source node to all other
+				nodes in an unweighted graph. A queue is typically employed to maintain the order of exploration, ensuring nodes
+				are visited in the order they are discovered.
+			</p>
+			<p>
+				One of the notable applications of BFS is its role in finding the shortest path in maze-solving scenarios. By
+				exploring adjacent cells layer by layer, BFS guarantees that the shortest path is identified before moving on to
+				longer routes. This characteristic makes BFS particularly useful in scenarios where finding the quickest route
+				is of paramount importance.
+			</p>
+			<p>
+				BFS is also crucial in network analysis, helping to determine the optimal routing of information. By examining
+				neighboring nodes at each layer, BFS aids in identifying the most efficient path for data transmission, a
+				critical aspect in the design and optimization of computer networks.
+			</p>
+			<p>
+				Despite its efficiency in certain scenarios, BFS may exhibit limitations in terms of memory usage. Storing all
+				nodes at a particular level in a queue can consume significant memory, making it less suitable for graphs with a
+				vast number of nodes. Additionally, BFS may not perform optimally in scenarios with weighted graphs, as it
+				doesn't account for edge weights during traversal.
+			</p>
+			<p>
+				In conclusion, Breadth-First Search stands as a powerful algorithm, excelling in scenarios where finding the
+				shortest path is paramount. Its systematic exploration and layer-by-layer approach make BFS a valuable tool in
+				various applications, offering a balanced mix of simplicity and effectiveness in graph traversal.
+			</p>
+		</div>
+	}
+}

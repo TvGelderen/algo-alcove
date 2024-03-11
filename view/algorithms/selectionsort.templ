@@ -1,34 +1,54 @@
 package algorithms
 
-import ( 
-    "github.com/TvGelderen/algo-alcove/view/pages"
-    "github.com/TvGelderen/algo-alcove/view/components"
+import (
+	"github.com/TvGelderen/algo-alcove/view/pages"
+	"github.com/TvGelderen/algo-alcove/view/components"
 )
 
 templ SelectionSort() {
-    @pages.Algorithms(){
-        @components.BreadCrumb([]components.BreadCrumbLink{
-        {
-            Path: "/algorithms",
-            Title: "Algorithms",
-        },
-        {
-            Path: "/algorithms/sorting",
-            Title: "Sorting",
-        },
-        {
-            Path: "/algorithms/sorting/selection-sort",
-            Title: "Selection Sort",
-        },
-        })
-        <h2 class="text-2xl md:text-3xl">Selection Sort</h2>
-        <div class="article">
-            <p>In the intricate world of sorting algorithms, Selection Sort emerges as a modest yet effective choreographer of order. Its simple and intuitive approach to arranging elements makes it a valuable player in the array of sorting techniques, demonstrating that sometimes, simplicity can be the key to success.</p>
-			<p>Selection Sort operates by dividing the array into two segments – the sorted and the unsorted. The algorithm repeatedly selects the smallest (or largest) element from the unsorted segment and swaps it with the first unsorted element. This process continues until the entire array is sorted. While Selection Sort's time complexity is quadratic, making it less efficient for large datasets, its straightforward implementation and minimal resource requirements contribute to its appeal.</p>
-		    <p>One of the notable characteristics of Selection Sort is its in-place nature. The algorithm sorts the data without requiring additional memory, making it memory-efficient and suitable for scenarios with limited resources.</p>
-			<p>Selection Sort's simplicity extends to its minimalistic code, making it an accessible choice for educational purposes. It serves as an excellent introductory sorting algorithm, allowing learners to grasp the fundamental concepts of sorting without the complexity of more advanced methods.</p>
-		    <p>While not the fastest algorithm in terms of time complexity, Selection Sort shines in scenarios where the dataset is small or nearly sorted. Its uncomplicated nature makes it suitable for applications where a quick and straightforward sorting solution is preferred over more complex algorithms.</p>
-        </div>
+	@pages.Algorithms() {
+		@components.BreadCrumb([]components.BreadCrumbLink{
+			{
+				Path:  "/algorithms",
+				Title: "Algorithms",
+			},
+			{
+				Path:  "/algorithms/sorting",
+				Title: "Sorting",
+			},
+			{
+				Title: "Selection Sort",
+			},
+		})
+		<h2 class="text-2xl md:text-3xl">Selection Sort</h2>
+		<div class="article">
+			<p>
+				In the intricate world of sorting algorithms, Selection Sort emerges as a modest yet effective choreographer of
+				order. Its simple and intuitive approach to arranging elements makes it a valuable player in the array of
+				sorting techniques, demonstrating that sometimes, simplicity can be the key to success.
+			</p>
+			<p>
+				Selection Sort operates by dividing the array into two segments – the sorted and the unsorted. The algorithm
+				repeatedly selects the smallest (or largest) element from the unsorted segment and swaps it with the first
+				unsorted element. This process continues until the entire array is sorted. While Selection Sort's time
+				complexity is quadratic, making it less efficient for large datasets, its straightforward implementation and
+				minimal resource requirements contribute to its appeal.
+			</p>
+			<p>
+				One of the notable characteristics of Selection Sort is its in-place nature. The algorithm sorts the data without
+				requiring additional memory, making it memory-efficient and suitable for scenarios with limited resources.
+			</p>
+			<p>
+				Selection Sort's simplicity extends to its minimalistic code, making it an accessible choice for educational
+				purposes. It serves as an excellent introductory sorting algorithm, allowing learners to grasp the fundamental
+				concepts of sorting without the complexity of more advanced methods.
+			</p>
+			<p>
+				While not the fastest algorithm in terms of time complexity, Selection Sort shines in scenarios where the dataset
+				is small or nearly sorted. Its uncomplicated nature makes it suitable for applications where a quick and
+				straightforward sorting solution is preferred over more complex algorithms.
+			</p>
+		</div>
         @components.Code("javascript", `<span class="hljs-keyword">function</span> <span class="hljs-title function_">swap</span>(<span class="hljs-params">arr, a, b</span>) 
 { 
     <span class="hljs-keyword">let</span> temp = arr[a]; 
@@ -53,6 +73,6 @@ templ SelectionSort() {
         <span class="hljs-title function_">swap</span>(arr, min_idx, i); 
     } 
 }`)
-        @VisualizeSort("selection-sort")
-    }
+		@VisualizeSort("selection-sort")
+	}
 }
