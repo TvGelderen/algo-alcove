@@ -34,7 +34,7 @@ function initializeVisualizeSort() {
         visualizeContainer.appendChild(element);
         arrElements.push(element);
     }
-    
+
     if (!sorting) {
         reloading = false;
     }
@@ -75,10 +75,10 @@ async function sort(event) {
 async function bubbleSort() {
     let i, j, swapped;
     let len = arr.length;
- 
+
     for (i = 0; i < len; i++) {
         swapped = false;
- 
+
         for (j = 0; j < (len - i - 1); j++) {
             if (reloading) {
                 reloading = false;
@@ -90,7 +90,7 @@ async function bubbleSort() {
             await sleep();
 
             if (arr[j] > arr[j + 1]) {
-                swap(j, j + 1); 
+                swap(j, j + 1);
                 swapped = true;
             }
 
@@ -98,27 +98,24 @@ async function bubbleSort() {
             deselect(j);
             deselect(j + 1);
         }
- 
+
         if (!swapped) {
             break;
         }
     }
 }
 
-async function insertionSort()
-{
+async function insertionSort() {
     let i, j, key;
     let len = arr.length;
 
-    for (i = 1; i < len; i++)
-    {
+    for (i = 1; i < len; i++) {
         select(i);
 
         key = arr[i];
         j = i - 1;
 
-        while (j >= 0 && arr[j] > key) 
-        {
+        while (j >= 0 && arr[j] > key) {
             if (reloading) {
                 reloading = false;
                 return;
@@ -129,7 +126,7 @@ async function insertionSort()
 
             arr[j + 1] = arr[j];
 
-            visualizeContainer.insertBefore(visualizeContainer.children[j + 1], visualizeContainer.children[j]); 
+            visualizeContainer.insertBefore(visualizeContainer.children[j + 1], visualizeContainer.children[j]);
 
             await sleep();
             deselect(j);
@@ -144,13 +141,11 @@ async function insertionSort()
     }
 }
 
-async function selectionSort()
-{
+async function selectionSort() {
     let i, j, min_idx;
     let len = arr.length;
-  
-    for (i = 0; i < len - 1; i++)
-    {
+
+    for (i = 0; i < len - 1; i++) {
         select(i);
 
         min_idx = i;
@@ -170,7 +165,7 @@ async function selectionSort()
                 deselect(j);
             }
         }
-  
+
         await sleep();
         swap(min_idx, i);
         await sleep();
@@ -179,25 +174,24 @@ async function selectionSort()
     }
 }
 
-async function merge(l, m, r)
-{
+async function merge(l, m, r) {
     let n1 = m - l + 1;
     let n2 = r - m;
- 
+
     let L = new Array(n1);
     let R = new Array(n2);
- 
+
     for (let i = 0; i < n1; i++) {
         L[i] = arr[l + i];
-	}
+    }
     for (let j = 0; j < n2; j++) {
         R[j] = arr[m + 1 + j];
-	}
- 
+    }
+
     let i = 0;
     let j = 0;
     let k = l;
- 
+
     while (i < n1 && j < n2) {
         if (L[i] <= R[j]) {
             arr[k] = L[i];
@@ -216,7 +210,7 @@ async function merge(l, m, r)
         }
         k++;
     }
- 
+
     while (i < n1) {
         arr[k] = L[i];
         if (k < l + 1) {
@@ -238,7 +232,7 @@ async function merge(l, m, r)
     }
 }
 
-async function mergeSort(l, r){
+async function mergeSort(l, r) {
     if (l >= r) {
         return;
     }
@@ -258,18 +252,35 @@ async function mergeSort(l, r){
 async function partition(low, high) {
     let pivot = arr[high];
     let i = low - 1;
-   
+
     for (let j = low; j < high; j++) {
         if (arr[j] < pivot) {
             i++;
+            select(i);
+            select(j);
+            await sleep();
+
             swap(i, j);
+
+            await sleep();
+            deselect(i);
+            deselect(j);
         }
     }
 
+    select(high);
+    select(i + 1);
+    await sleep();
+
     swap(high, i + 1);
+
+    await sleep();
+    deselect(high);
+    deselect(i + 1);
+
     return i + 1;
 }
- 
+
 async function quickSort(low, high) {
     if (low < high) {
         let pi = await partition(low, high);
