@@ -63,3 +63,13 @@ input:has(+label.error) {
         transform: rotate(360deg);
     }
 }
+
+.sort-bar {
+    width: 1%;
+    margin: 0 0.5px;
+    background: #c0caf5;
+}
+
+.sort-bar.selected {
+    background: #00ff00;
+}

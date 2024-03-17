@@ -26,10 +26,8 @@ function initializeVisualizeSort() {
     visualizeContainer.innerHTML = '';
     for (let i = 0; i < arr.length; i++) {
         const element = document.createElement('div');
-        element.style.width = '1%';
+        element.classList.add('sort-bar');
         element.style.height = `${arr[i]}%`;
-        element.style.background = '#c0caf5';
-        element.style.margin = '0 0.5px';
 
         visualizeContainer.appendChild(element);
         arrElements.push(element);
@@ -67,8 +65,6 @@ async function sort(event) {
             break;
     }
 
-    console.log(arr);
-
     sorting = false;
 }
 
@@ -95,8 +91,7 @@ async function bubbleSort() {
             }
 
             await sleep();
-            deselect(j);
-            deselect(j + 1);
+            deselect();
         }
 
         if (!swapped) {
@@ -129,15 +124,14 @@ async function insertionSort() {
             visualizeContainer.insertBefore(visualizeContainer.children[j + 1], visualizeContainer.children[j]);
 
             await sleep();
-            deselect(j);
-            deselect(j + 1);
+            deselect();
 
             j = j - 1;
         }
 
         arr[j + 1] = key;
 
-        deselect(i);
+        deselect();
     }
 }
 
@@ -146,31 +140,27 @@ async function selectionSort() {
     let len = arr.length;
 
     for (i = 0; i < len - 1; i++) {
-        select(i);
-
         min_idx = i;
+
         for (j = i + 1; j < len; j++) {
             if (reloading) {
                 reloading = false;
                 return;
             }
 
-            select(j);
-
             if (arr[j] < arr[min_idx]) {
-                await sleep();
-                deselect(i);
                 min_idx = j;
-            } else {
-                deselect(j);
             }
         }
 
+        select(i);
+        select(min_idx);
         await sleep();
+
         swap(min_idx, i);
+
         await sleep();
-        deselect(i);
-        deselect(min_idx);
+        deselect();
     }
 }
 
@@ -193,29 +183,41 @@ async function merge(l, m, r) {
     let k = l;
 
     while (i < n1 && j < n2) {
+        select(l + i);
+        select(m + 1 + j);
+        select(k);
+        await sleep();
+
         if (L[i] <= R[j]) {
             arr[k] = L[i];
             if (k < l + 1) {
                 visualizeContainer.insertBefore(visualizeContainer.children[l + i], visualizeContainer.children[k]);
-                visualizeContainer.insertBefore(visualizeContainer.children[k + 1], visualizeContainer.children[l + i]);
             }
             i++;
         } else {
             arr[k] = R[j];
             if (k < m + 1 + j) {
                 visualizeContainer.insertBefore(visualizeContainer.children[m + 1 + j], visualizeContainer.children[k]);
-                visualizeContainer.insertBefore(visualizeContainer.children[k + 1], visualizeContainer.children[m + 1 + j]);
             }
             j++;
         }
         k++;
+
+        await sleep();
+        deselect();
     }
 
     while (i < n1) {
         arr[k] = L[i];
         if (k < l + 1) {
+            select(l + i);
+            select(k);
+            await sleep();
+
             visualizeContainer.insertBefore(visualizeContainer.children[l + i], visualizeContainer.children[k]);
-            visualizeContainer.insertBefore(visualizeContainer.children[k + 1], visualizeContainer.children[l + i]);
+
+            await sleep();
+            deselect();
         }
         i++;
         k++;
@@ -224,8 +226,14 @@ async function merge(l, m, r) {
     while (j < n2) {
         arr[k] = R[j];
         if (k < m + 1 + j) {
+            select(m + 1 + j);
+            select(k);
+            await sleep();
+
             visualizeContainer.insertBefore(visualizeContainer.children[m + 1 + j], visualizeContainer.children[k]);
-            visualizeContainer.insertBefore(visualizeContainer.children[k + 1], visualizeContainer.children[m + 1 + j]);
+
+            await sleep();
+            deselect();
         }
         j++;
         k++;
@@ -263,8 +271,7 @@ async function partition(low, high) {
             swap(i, j);
 
             await sleep();
-            deselect(i);
-            deselect(j);
+            deselect();
         }
     }
 
@@ -275,8 +282,7 @@ async function partition(low, high) {
     swap(high, i + 1);
 
     await sleep();
-    deselect(high);
-    deselect(i + 1);
+    deselect();
 
     return i + 1;
 }
@@ -307,9 +313,12 @@ function swap(i, j) {
 }
 
 function select(i) {
-    visualizeContainer.children[i].style.background = '#00ff00';
+    visualizeContainer.children[i].classList.add('selected');
 }
 
-function deselect(i) {
-    visualizeContainer.children[i].style.background = '#c0caf5';
+function deselect() {
+    const selected = visualizeContainer.querySelectorAll('.selected');
+    for (const el of selected) {
+        el.classList.remove('selected');
+    }
 }
