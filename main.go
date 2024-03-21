@@ -20,7 +20,7 @@ func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "3000"
-		fmt.Print("PORT is missing, defaulting to 3000\n")
+		fmt.Println("PORT is missing, defaulting to 3000")
 	}
 
 	dbConnectionString := os.Getenv("DB_CONNECTION_STRING")

@@ -1,0 +1,29 @@
+package algorithms
+
+templ VisualizePathFind(algorithm string) {
+    <h3 class="text-xl md:text-2xl mt-6">Visiualze</h3>
+    <div id="path-finding-visualize-container" class="flex items-end w-full h-[500px] my-6"></div>
+    <div class="flex justify-between">
+        <div class="flex">
+            <div>
+                <button class="button" onclick="search(event)" data-algorithm={ algorithm }>Find path</button>
+            </div>
+            <div>
+                <button class="button secondary ml-4" onclick="initializeVisualizeSort()">Reset</button>
+            </div>
+        </div>
+        <div>
+            <div>
+                <label for="start-node">Start node</label>
+                <input id="start-node" class="input" type="number" placeholder="1" step="1" />
+                <label for="end-node">End node</label>
+                <input id="end-node" class="input" type="number" placeholder="10" step="1" />
+            </div>
+            <div class="flex items-center justify-end mt-2">
+                <label for="search-delay">Search delay (ms)</label>
+                <input id="search-delay" class="input ml-2" type="number" placeholder="1" step="0.01" />
+            </div>
+        </div>
+    </div>
+    <script defer type="text/javascript" src="/assets/js/visualizepathfind.js"></script>
+}

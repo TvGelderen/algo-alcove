@@ -1,5 +1,5 @@
 let arr;
-let visualizeContainer;
+let sortContainer;
 let sorting;
 let reloading;
 let sortingDelay = 1;
@@ -13,8 +13,8 @@ function initializeVisualizeSort() {
         arr.push(Math.floor(Math.random() * 100) + 1);
     }
 
-    visualizeContainer = document.getElementById('sorting-visualize-container');
-    if (!visualizeContainer) return;
+    sortContainer = document.getElementById('sorting-visualize-container');
+    if (!sortContainer) return;
 
     const sortingDelayInput = document.getElementById('sorting-delay');
     if (sortingDelayInput) {
@@ -23,13 +23,13 @@ function initializeVisualizeSort() {
         })
     }
 
-    visualizeContainer.innerHTML = '';
+    sortContainer.innerHTML = '';
     for (let i = 0; i < arr.length; i++) {
         const element = document.createElement('div');
         element.classList.add('sort-bar');
         element.style.height = `${arr[i]}%`;
 
-        visualizeContainer.appendChild(element);
+        sortContainer.appendChild(element);
         arrElements.push(element);
     }
 
@@ -83,14 +83,14 @@ async function bubbleSort() {
 
             select(j);
             select(j + 1);
-            await sleep();
+            await sortSleep();
 
             if (arr[j] > arr[j + 1]) {
                 swap(j, j + 1);
                 swapped = true;
             }
 
-            await sleep();
+            await sortSleep();
             deselect();
         }
 
@@ -117,13 +117,13 @@ async function insertionSort() {
             }
 
             select(j);
-            await sleep();
+            await sortSleep();
 
             arr[j + 1] = arr[j];
 
-            visualizeContainer.insertBefore(visualizeContainer.children[j + 1], visualizeContainer.children[j]);
+            sortContainer.insertBefore(sortContainer.children[j + 1], sortContainer.children[j]);
 
-            await sleep();
+            await sortSleep();
             deselect();
 
             j = j - 1;
@@ -155,11 +155,11 @@ async function selectionSort() {
 
         select(i);
         select(min_idx);
-        await sleep();
+        await sortSleep();
 
         swap(min_idx, i);
 
-        await sleep();
+        await sortSleep();
         deselect();
     }
 }
@@ -186,24 +186,24 @@ async function merge(l, m, r) {
         select(l + i);
         select(m + 1 + j);
         select(k);
-        await sleep();
+        await sortSleep();
 
         if (L[i] <= R[j]) {
             arr[k] = L[i];
             if (k < l + 1) {
-                visualizeContainer.insertBefore(visualizeContainer.children[l + i], visualizeContainer.children[k]);
+                sortContainer.insertBefore(sortContainer.children[l + i], sortContainer.children[k]);
             }
             i++;
         } else {
             arr[k] = R[j];
             if (k < m + 1 + j) {
-                visualizeContainer.insertBefore(visualizeContainer.children[m + 1 + j], visualizeContainer.children[k]);
+                sortContainer.insertBefore(sortContainer.children[m + 1 + j], sortContainer.children[k]);
             }
             j++;
         }
         k++;
 
-        await sleep();
+        await sortSleep();
         deselect();
     }
 
@@ -212,11 +212,11 @@ async function merge(l, m, r) {
         if (k < l + 1) {
             select(l + i);
             select(k);
-            await sleep();
+            await sortSleep();
 
-            visualizeContainer.insertBefore(visualizeContainer.children[l + i], visualizeContainer.children[k]);
+            sortContainer.insertBefore(sortContainer.children[l + i], sortContainer.children[k]);
 
-            await sleep();
+            await sortSleep();
             deselect();
         }
         i++;
@@ -228,11 +228,11 @@ async function merge(l, m, r) {
         if (k < m + 1 + j) {
             select(m + 1 + j);
             select(k);
-            await sleep();
+            await sortSleep();
 
-            visualizeContainer.insertBefore(visualizeContainer.children[m + 1 + j], visualizeContainer.children[k]);
+            sortContainer.insertBefore(sortContainer.children[m + 1 + j], sortContainer.children[k]);
 
-            await sleep();
+            await sortSleep();
             deselect();
         }
         j++;
@@ -266,22 +266,22 @@ async function partition(low, high) {
             i++;
             select(i);
             select(j);
-            await sleep();
+            await sortSleep();
 
             swap(i, j);
 
-            await sleep();
+            await sortSleep();
             deselect();
         }
     }
 
     select(high);
     select(i + 1);
-    await sleep();
+    await sortSleep();
 
     swap(high, i + 1);
 
-    await sleep();
+    await sortSleep();
     deselect();
 
     return i + 1;
@@ -296,7 +296,7 @@ async function quickSort(low, high) {
     }
 }
 
-const sleep = async () => await new Promise(r => setTimeout(r, sortingDelay / 2));
+const sortSleep = async () => await new Promise(r => setTimeout(r, sortingDelay / 2));
 
 function swap(i, j) {
     const temp = arr[i];
@@ -304,20 +304,20 @@ function swap(i, j) {
     arr[j] = temp;
 
     if (i < j) {
-        visualizeContainer.insertBefore(visualizeContainer.children[i], visualizeContainer.children[j]);
-        visualizeContainer.insertBefore(visualizeContainer.children[j], visualizeContainer.children[i]);
+        sortContainer.insertBefore(sortContainer.children[i], sortContainer.children[j]);
+        sortContainer.insertBefore(sortContainer.children[j], sortContainer.children[i]);
     } else {
-        visualizeContainer.insertBefore(visualizeContainer.children[j], visualizeContainer.children[i]);
-        visualizeContainer.insertBefore(visualizeContainer.children[i], visualizeContainer.children[j]);
+        sortContainer.insertBefore(sortContainer.children[j], sortContainer.children[i]);
+        sortContainer.insertBefore(sortContainer.children[i], sortContainer.children[j]);
     }
 }
 
 function select(i) {
-    visualizeContainer.children[i].classList.add('selected');
+    sortContainer.children[i].classList.add('selected');
 }
 
 function deselect() {
-    const selected = visualizeContainer.querySelectorAll('.selected');
+    const selected = sortContainer.querySelectorAll('.selected');
     for (const el of selected) {
         el.classList.remove('selected');
     }
