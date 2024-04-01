@@ -73,3 +73,15 @@ input:has(+label.error) {
 .sort-bar.selected {
     background: #00ff00;
 }
+
+.node {
+    @apply bg-text w-[50px] h-[50px] flex justify-center items-center rounded-full z-[2];
+}
+
+.node span {
+    @apply pt-1 text-black text-2xl;
+}
+
+line {
+    @apply stroke-text z-0;
+}
