@@ -65,13 +65,11 @@ input:has(+label.error) {
 }
 
 .sort-bar {
-    width: 1%;
-    margin: 0 0.5px;
-    background: #c0caf5;
+    @apply bg-text width-[1%] mx-[0.5px];
 }
 
 .sort-bar.selected {
-    background: #00ff00;
+    @apply bg-theme;
 }
 
 .node {

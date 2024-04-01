@@ -6,11 +6,6 @@ let startNode = 1;
 let endNode = 10;
 let searchDelay = 1;
 
-// -o-o-
-// o-o-o
-// o-o-o
-// -o-o-
-
 const graph = [
     [0, 0, 1, 0, 0, 0, 2, 0, 0],
     [3, 0, 0, 0, 4, 0, 0, 0, 5],
@@ -32,14 +27,21 @@ class Node {
     }
 }
 
-function initializeVisualizePathFind() {
+function initVisualizePathFind() {
     graphContainer = document.getElementById('path-finding-visualize-container');
-    edgeContainer = document.getElementById('edge-container');
-    if (!graphContainer || !edgeContainer) return;
+    if (!graphContainer) return;
 
+    graphContainer.innerHTML = '';
+    nodes = [];
+
+    edgeContainer = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    edgeContainer.style.position = 'absolute';
+    edgeContainer.style.width = '100%';
+    edgeContainer.style.height = '100%';
+    graphContainer.appendChild(edgeContainer);
     graphContainer.style.gridTemplateColumns = `repeat(${graph[0].length}, 50px)`;
     graphContainer.style.rowGap = '100px';
-    
+
     for (let y = 0; y < graph.length; y++) {
         for (let x = 0; x < graph[y].length; x++) {
             const el = document.createElement('div');
@@ -68,8 +70,6 @@ function initializeVisualizePathFind() {
 
             if (!nodes[i].edges.includes(nodes[j]) && Math.random() > 0.5) {
                 const edge = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                console.log(nodes[i].element.getBoundingClientRect());
-                console.log(containerRect);
 
                 const x1 = nodes[i].element.getBoundingClientRect().x - containerRect.left + 25;
                 const y1 = nodes[i].element.getBoundingClientRect().y - containerRect.top + 25;
@@ -89,7 +89,7 @@ function initializeVisualizePathFind() {
     }
 }
 
-initializeVisualizePathFind();
+initVisualizePathFind();
 
 async function search(event) {
     if (sorting) {

@@ -4,7 +4,7 @@ let sorting;
 let reloading;
 let sortingDelay = 1;
 
-function initializeVisualizeSort() {
+function initVisualizeSort() {
     arr = [];
     arrElements = [];
     reloading = true;
@@ -38,7 +38,7 @@ function initializeVisualizeSort() {
     }
 }
 
-initializeVisualizeSort();
+initVisualizeSort();
 
 async function sort(event) {
     if (sorting) {

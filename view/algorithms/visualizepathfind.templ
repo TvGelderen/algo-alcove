@@ -2,16 +2,14 @@ package algorithms
 
 templ VisualizePathFind(algorithm string) {
     <h3 class="text-xl md:text-2xl mt-6">Visiualze</h3>
-    <div id="path-finding-visualize-container" class="relative grid justify-center my-6">
-        <svg id="edge-container" class="absolute w-full h-full"></svg>
-    </div>
+    <div id="path-finding-visualize-container" class="relative grid justify-center my-6"></div>
     <div class="flex justify-between">
         <div class="flex">
             <div>
                 <button class="button" onclick="search(event)" data-algorithm={ algorithm }>Find path</button>
             </div>
             <div>
-                <button class="button secondary ml-4" onclick="initializeVisualizeSort()">Reset</button>
+                <button class="button secondary ml-4" onclick="initVisualizePathFind()">Reset</button>
             </div>
         </div>
         <div>
