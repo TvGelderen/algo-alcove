@@ -70,16 +70,10 @@ function initVisualizePathFind() {
 
             if (!nodes[i].edges.includes(nodes[j]) && Math.random() > 0.5) {
                 const edge = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-
-                const x1 = nodes[i].element.getBoundingClientRect().x - containerRect.left + 25;
-                const y1 = nodes[i].element.getBoundingClientRect().y - containerRect.top + 25;
-                const x2 = nodes[j].element.getBoundingClientRect().x - containerRect.left + 25;
-                const y2 = nodes[j].element.getBoundingClientRect().y - containerRect.top + 25;
-
-                edge.setAttribute("x1", `${x1}`);
-                edge.setAttribute("y1", `${y1}`);
-                edge.setAttribute("x2", `${x2}`);
-                edge.setAttribute("y2", `${y2}`);
+                edge.setAttribute("x1", `${nodes[i].element.getBoundingClientRect().x - containerRect.left + 25}`);
+                edge.setAttribute("y1", `${nodes[i].element.getBoundingClientRect().y - containerRect.top + 25}`);
+                edge.setAttribute("x2", `${nodes[j].element.getBoundingClientRect().x - containerRect.left + 25}`);
+                edge.setAttribute("y2", `${nodes[j].element.getBoundingClientRect().y - containerRect.top + 25}`);
                 edgeContainer.appendChild(edge);
 
                 nodes[i].addEdge(nodes[j]);

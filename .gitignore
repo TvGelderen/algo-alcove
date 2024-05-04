@@ -32,6 +32,7 @@ coverage
 
 # Templ
 *_templ.go
+*_templ.txt
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out

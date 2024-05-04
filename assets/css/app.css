@@ -65,7 +65,7 @@ input:has(+label.error) {
 }
 
 .sort-bar {
-    @apply bg-text width-[1%] mx-[0.5px];
+    @apply bg-text w-[1%] mx-[0.5px];
 }
 
 .sort-bar.selected {
