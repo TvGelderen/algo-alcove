@@ -21,37 +21,6 @@ templ MergeSort() {
 			},
 		})
 		<h2 class="text-2xl md:text-3xl">Merge Sort</h2>
-		<div class="article">
-			<p>
-				Merge Sort, a sophisticated algorithm revered for its efficiency and stability, orchestrates a harmonious
-				symphony of divide-and-conquer principles to elegantly sort arrays. Developed by John von Neumann in 1945, this
-				algorithm has stood the test of time, becoming a staple in the world of sorting.
-			</p>
-			<p>
-				At its core, Merge Sort divides the array into two halves, recursively sorts each half, and then merges them back
-				together. This divide-and-conquer approach ensures that the algorithm breaks down the problem into more
-				manageable sub-problems, tackling them with precision before seamlessly combining the results. The efficiency of
-				Merge Sort lies in its consistent O(n log n) time complexity, making it a reliable choice for sorting large
-				datasets.
-			</p>
-			<p>
-				One of the distinguishing features of Merge Sort is its stability. A stable sorting algorithm preserves the
-				relative order of equal elements, ensuring that identical values maintain their initial positions in the sorted
-				array. This stability is crucial in scenarios where maintaining the original order of equivalent elements is
-				essential.
-			</p>
-			<p>
-				Merge Sort's elegance extends to its suitability for external sorting – a technique employed when the dataset is
-				too large to fit into memory. By dividing the data into smaller chunks, sorting them individually, and then
-				merging the sorted chunks, Merge Sort efficiently manages vast datasets without compromising on speed or
-				stability.
-			</p>
-			<p>
-				The clarity of Merge Sort's recursive approach makes it an excellent teaching tool for understanding the
-				principles of divide and conquer. It offers a visually intuitive representation of how breaking down a complex
-				problem into smaller, more manageable parts can lead to a robust solution.
-			</p>
-		</div>
         @components.Code("javascript", `<span class="hljs-keyword">function</span> <span class="hljs-title function_">merge</span>(<span class="hljs-params">arr, l, m, r</span>)
 {
     <span class="hljs-keyword">let</span> n1 = m - l + <span class="hljs-number">1</span>;

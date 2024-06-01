@@ -1,12 +1,12 @@
 package algorithms
 
 templ VisualizeSort(algorithm string) {
-    <h3 class="text-xl md:text-2xl mt-6">Visiualze</h3>
+    <h3 class="text-xl md:text-2xl mt-6">Visiualize</h3>
     <div id="sorting-visualize-container" class="flex items-end w-full h-[500px] my-6"></div>
     <div class="flex justify-between">
         <div class="flex">
             <button class="button" onclick="sort(event)" data-algorithm={ algorithm }>Sort</button>
-            <button class="button secondary ml-4" onclick="initializeVisualizeSort()">Reset</button>
+            <button class="button secondary ml-4" onclick="initVisualizeSort()">Reset</button>
         </div>
         <div>
             <label for="sorting-delay">Sorting delay (ms)</label>

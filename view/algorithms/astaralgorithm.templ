@@ -21,36 +21,5 @@ templ AStarAlgorithm() {
             },
         })
         <h2 class="text-2xl md:text-3xl">A* Algorithm</h2>
-        <div class="article">
-            <p> 
-                The A* algorithm, a popular pathfinding and graph traversal algorithm, has proven to be a versatile tool in
-                artificial intelligence, robotics, and game development. Created by Peter Hart, Nils Nilsson, and Bertram
-                Raphael in 1968, A* combines the best of both breadth-first search and greedy algorithms, offering a reliable
-                solution for finding the shortest path in weighted graphs.
-            </p>
-            <p>
-                At its core, A* uses a heuristic approach to estimate the cost of reaching the goal from a particular node. This
-                heuristic function, often denoted as h(n), guides the algorithm in selecting the most promising nodes, enabling
-                it to explore the graph efficiently. A* considers both the cost of reaching a node from the start (g(n)) and the
-                estimated cost to the goal (h(n)), aiming to minimize the sum f(n) = g(n) + h(n).
-            </p>
-            <p>
-                One of the distinguishing features of A* is its optimality and efficiency in finding the shortest path. By
-                incorporating the heuristic function, A* intelligently narrows down its search, prioritizing nodes that are more
-                likely to lead to an optimal solution. This makes A* particularly well-suited for applications where finding the
-                most efficient route is crucial, such as in GPS navigation systems.
-            </p>
-            <p>
-                A* has found widespread use in various fields, including robotics and video game development. In robotics, A*
-                helps autonomous systems plan their paths, avoiding obstacles and reaching destinations with minimum effort. In
-                game development, A* is employed for character movement, ensuring non-player characters navigate game
-                environments effectively.
-            </p>
-            <p>
-                Despite its strengths, A* is not without considerations. The quality of the heuristic function greatly influences
-                the algorithm's performance, and poorly designed heuristics can lead to suboptimal solutions. Additionally, A*
-                may struggle in scenarios with dynamic environments or changing costs, as it doesn't adapt to real-time changes.
-            </p>
-        </div>
     }
 }

@@ -21,40 +21,5 @@ templ DijkstrasAlgorithm() {
 			},
 		})
 		<h2 class="text-2xl md:text-3xl">Dijkstra's Algorithm</h2>
-		<div class="article">
-			<p>
-				Dijkstra's algorithm, conceived by Dutch computer scientist Edsger W. Dijkstra in 1956, stands as a landmark
-				contribution to graph theory and is widely utilized for finding the shortest path in weighted graphs. This
-				algorithm has played a pivotal role in diverse applications, from network routing to robotics and geographical
-				information systems.
-			</p>
-			<p>
-				The primary objective of Dijkstra's algorithm is to determine the shortest path from a designated source node to
-				all other nodes in a graph with non-negative edge weights. It employs a greedy approach, iteratively selecting
-				the node with the smallest tentative distance and updating its neighbors' distances accordingly.
-			</p>
-			<p>
-				The algorithm maintains two sets of nodes: one with tentative distances yet to be finalized and another with the
-				settled nodes. It starts by setting the tentative distance to the source node as zero and all other nodes as
-				infinity. In each iteration, it selects the node with the smallest tentative distance, explores its neighbors,
-				and updates their distances if a shorter path is found. This process continues until all nodes are settled.
-			</p>
-			<p>
-				Dijkstra's algorithm is renowned for its optimality in finding the shortest path. Its guarantee of optimality is
-				attributed to the fact that once a node is settled, its distance is final and will not be revisited, ensuring
-				the algorithm always selects the shortest path at each step.
-			</p>
-			<p>
-				The application of Dijkstra's algorithm extends across various domains. In computer networking, it aids in
-				determining the optimal route for data transmission. In robotics, it facilitates path planning for autonomous
-				vehicles, ensuring they navigate efficiently through their environment.
-			</p>
-			<p>
-				While Dijkstra's algorithm excels in scenarios with non-negative edge weights, it may encounter challenges in
-				graphs with negative weights. For such cases, alternative algorithms like the Bellman-Ford algorithm are more
-				suitable. Nevertheless, Dijkstra's algorithm remains a cornerstone in the toolkit of algorithms, providing an
-				effective and reliable method for finding the shortest path in a variety of practical scenarios.
-			</p>
-		</div>
 	}
 }

@@ -19,7 +19,7 @@ func main() {
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "3000"
+		port = ":3000"
 		fmt.Println("PORT is missing, defaulting to 3000")
 	}
 
@@ -39,9 +39,9 @@ func main() {
 	e.Use(middleware.CORSWithConfig(middleware.DefaultCORSConfig))
 	e.Use(handlers.DefaultMiddleWare)
 
-    addRoutes(e, h)
+	addRoutes(e, h)
 
-	e.Start(":" + port)
+	e.Start(port)
 }
 
 func addRoutes(e *echo.Echo, h *handlers.DefaultHandler) {
@@ -56,7 +56,7 @@ func addRoutes(e *echo.Echo, h *handlers.DefaultHandler) {
 	e.POST("/api/login", h.HandleLogin)
 	e.GET("/api/logout", h.HandleLogout)
 
-    addAlgorithmEndpoints(e)
+	addAlgorithmEndpoints(e)
 
 	e.GET("/*", handlers.HandleNotFoundPage)
 }

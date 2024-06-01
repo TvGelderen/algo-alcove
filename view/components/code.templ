@@ -3,6 +3,7 @@ package components
 import "fmt"
 
 templ Code(language, code string) {
+    <h3 class="text-xl md:text-2xl mt-2 mb-2">Code</h3>
     <pre class="text-md relative overflow-hidden max-w-full">
         <code class={ fmt.Sprintf("language-%v hljs", language) }>@templ.Raw(code)</code>
     </pre>
