@@ -19,7 +19,7 @@ function initVisualizeSort() {
     const sortingDelayInput = document.getElementById('sorting-delay');
     if (sortingDelayInput) {
         sortingDelayInput.addEventListener('change', () => {
-            sortingDelay = parseInt(sortingDelayInput.value);
+            sortingDelay = parseFloat(sortingDelayInput.value);
         })
     }
 

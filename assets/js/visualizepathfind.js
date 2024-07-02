@@ -31,6 +31,31 @@ function initVisualizePathFind() {
     graphContainer = document.getElementById('path-finding-visualize-container');
     if (!graphContainer) return;
 
+    let startNodeInput = document.getElementById('start-node');
+    let endNodeInput = document.getElementById('end-node');
+    let searchDelayInput = document.getElementById('search-delay');
+
+    startNodeInput.addEventListener('change', () => {
+        let value = parseInt(startNodeInput.value);
+        if (value < 1 || value > 10) {
+            // TODO: set error when out of range
+            return;
+        }
+        startNode = value;
+    });
+
+    endNodeInput.addEventListener('change', () => {
+        let value = parseInt(endNodeInput.value);
+        console.log(value);
+        if (value < 1 || value > 10) {
+            // TODO: set error when out of range
+            return;
+        }
+        endNode = value;
+    });
+
+    searchDelayInput.addEventListener('change', () => searchDelay = parseFloat(startNodeInput.value));
+
     graphContainer.innerHTML = '';
     nodes = [];
 
@@ -85,10 +110,16 @@ function initVisualizePathFind() {
 
 initVisualizePathFind();
 
+window.addEventListener('resize', () => {
+    // TODO: redraw the graph after resize
+});
+
 async function search(event) {
-    if (sorting) {
+    if (searching) {
         return;
     }
+
+    console.log(`Start node: ${startNode}\tEnd node: ${endNode}\tDelay: ${searchDelay}`);
 
     searching = true;
 
