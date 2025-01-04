@@ -5,12 +5,6 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type DefaultHandler struct{}
-
-func New() *DefaultHandler {
-	return &DefaultHandler{}
-}
-
 func render(c echo.Context, component templ.Component) error {
 	return component.Render(c.Request().Context(), c.Response())
 }

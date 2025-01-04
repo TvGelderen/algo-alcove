@@ -1,0 +1,16 @@
+services:
+  main:
+    restart: always
+    build:
+      context: .
+    container_name: algo-alcove
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=:5000
+    networks:
+      - nginx_default
+
+networks:
+  nginx_default:
+    external: true

@@ -5,14 +5,11 @@ import (
 	"os"
 
 	"github.com/TvGelderen/algo-alcove/handlers"
-	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
-	godotenv.Load(".env")
-
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = ":3000"
@@ -41,6 +38,8 @@ func main() {
 	e.GET("/algorithms/pathfinding/a-star-algorithm", handlers.HandleAStarAlgorithm)
 
 	e.GET("/*", handlers.HandleNotFoundPage)
+
+	fmt.Printf("Starting server on %s", port)
 
 	e.Start(port)
 }
