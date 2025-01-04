@@ -1,15 +1,5 @@
 package components
 
-import "github.com/TvGelderen/algo-alcove/models"
-
-func getEmail(ctx context.Context) (string, bool) {
-	user := ctx.Value("user")
-	if user != nil {
-		return user.(models.User).Email, true
-	}
-	return "", false
-}
-
 templ Header() {
 	<header
 		class="bg-secondary w-full h-[48px] md:h-[60px] flex justify-between items-center px-2"
@@ -27,18 +17,6 @@ templ Header() {
 					<a class="nav-link md:ml-6" href="/">Home</a>
 					<a class="nav-link md:ml-6" href="/algorithms">Algorithms</a>
 				</div>
-				<div class="md:hidden w-full my-4 border-b-[1px] border-b-tertiary"></div>
-				if email, ok := getEmail(ctx); ok {
-					<div class="flex items-center">
-						<div class="mr-2 mb-2 md:mb-0">Hi, { email }!</div>
-						<button hx-get="/api/logout" class="button secondary">Logout</button>
-					</div>
-				} else {
-					<div class="flex">
-						<a class="button secondary mr-2" href="/login">Login</a>
-						<a class="button" href="/register">Register</a>
-					</div>
-				}
 			</nav>
 		</div>
 		<div class="menu-icon-wrapper md:hidden">
