@@ -2,9 +2,9 @@
 node_modules
 vendor
 tmp
-#seeds
 
 .vscode
+
 # Logs
 logs
 *.log

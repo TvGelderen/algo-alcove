@@ -3,7 +3,7 @@ services:
     restart: always
     build:
       context: .
-    container_name: algo-alcove
+    container_name: algora
     ports:
       - "5000:5000"
     environment:

@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"github.com/TvGelderen/algo-alcove/view/algorithms"
-	"github.com/TvGelderen/algo-alcove/view/pages"
+	"github.com/TvGelderen/algora/view/algorithms"
+	"github.com/TvGelderen/algora/view/pages"
 	"github.com/labstack/echo/v4"
 )
 

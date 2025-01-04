@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/TvGelderen/algo-alcove/handlers"
+	"github.com/TvGelderen/algora/handlers"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -12,8 +12,8 @@ import (
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = ":3000"
 		fmt.Println("PORT is missing, defaulting to 3000")
+		port = ":3000"
 	}
 
 	e := echo.New()
